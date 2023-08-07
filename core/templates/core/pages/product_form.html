@@ -1,0 +1,75 @@
+{% extends 'core/pages/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mt-5">Product</h1>
+    <form class="mt-4" action="" method="post">
+        <!-- Name input -->
+        <div class="row mb-2 justify-content-between">
+            <div class="col-9">
+                <div class="form-outline mb-2">
+                    <label class="form-label" for="form4Example2">Product name</label>
+                      <input type="email" id="form4Example2" class="form-control" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-2">
+                    <label class="form-label" for="form4Example2">Price</label>
+                    <input type="number" id="form4Example2" class="form-control" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-2">
+                    <label class="form-label" for="form4Example2">Stock</label>
+                    <input type="number" id="form4Example2" class="form-control" />
+                </div>
+            </div>
+            
+        </div>
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form4Example3">Message</label>
+            <textarea class="form-control" id="form4Example3" rows="4" style="resize: none;"></textarea>
+          </div>
+
+        <!-- Email input -->
+        <div class="row">
+            <div class="col-7">
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form4Example2">Image</label>
+                    <input type="file" id="form4Example2" class="form-control" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form4Example2">Category</label>
+                    <select name="" id="" class="form-select">
+                        <option value="">oi</option>
+                        <option value="">oi</option>
+                        <option value="">oi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form4Example2">Posted by</label>
+                    <select name="" id="" class="form-select">
+                        <option value="">oi</option>
+                        <option value="">oi</option>
+                        <option value="">oi</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+      
+        <!-- Message input -->      
+      
+        <!-- Submit button -->
+        <div class="row justify-content-center">
+            <div class="col">
+                <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+            </div>
+        </div>
+      </form>
+</div>
+{% endblock %}

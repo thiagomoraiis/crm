@@ -1,0 +1,17 @@
+{% extends 'core/pages/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mt-5">Product</h1>
+    <p>Deseja deletar esse produto?</p>
+    <form class="mt-4" action="" method="post">
+        <!-- Submit button -->
+        <div class="row justify-content-start">
+            <div class="col-4">
+                <button type="submit" class="btn btn-danger btn-block mb-4">Delete</button>
+            </div>
+        </div>
+      </form>
+</div>
+{% endblock %}

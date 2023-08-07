@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404 # noqa
-from django.views.generic import TemplateView, DetailView, ListView
+from django.views.generic import TemplateView, ListView
 from product.models import Product
 
 
@@ -19,7 +19,25 @@ class IndexListView(ListView):
         return context
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(TemplateView):
     template_name = 'core/pages/product.html'
-    model = Product
-    slug_url_kwarg = 'slug'
+
+
+class RegisterTemplateView(TemplateView):
+    template_name = 'core/pages/register.html'
+
+
+class ProductCreateView(TemplateView):
+    template_name = 'core/pages/product_form.html'
+
+
+class ProductUpdateView(TemplateView):
+    template_name = 'core/pages/product_form.html'
+
+
+class ProductDeleteView(TemplateView):
+    template_name = 'core/pages/product_delete.html'
+
+
+class ProductListView(TemplateView):
+    template_name = 'core/pages/list_products.html'
