@@ -1,0 +1,498 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% block content %}
+  <section>
+    <div class="container py-5">
+      <div class="row">
+        <header class="mb-4">
+            <h3>New products</h3>
+        </header>
+        <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+          <div class="card">
+            <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
+              class="card-img-top" alt="Laptop" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                <p class="small text-danger"><s>$1099</s></p>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-3">
+                <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                <h5 class="text-dark mb-0">$999</h5>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-2">
+                <p class="text-muted mb-0">Available: <span class="fw-bold">6</span></p>
+                <div class="ms-auto text-warning">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mb-2">
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+            <div class="card">
+              <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/7.webp"
+                class="card-img-top" alt="Laptop" />
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                  <p class="small text-danger"><s>$1099</s></p>
+                </div>
+    
+                <div class="d-flex justify-content-between mb-3">
+                  <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                  <h5 class="text-dark mb-0">$999</h5>
+                </div>
+    
+                <div class="d-flex justify-content-between mb-2">
+                  <p class="text-muted mb-0">Available: <span class="fw-bold">6</span></p>
+                  <div class="ms-auto text-warning">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                  </div>
+                </div>
+  
+                <div class="d-flex justify-content-between mb-2">
+                  <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                  <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+          <div class="card">
+            <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/5.webp"
+              class="card-img-top" alt="Gaming Laptop" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                <p class="small text-danger"><s>$1399</s></p>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-3">
+                <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                <h5 class="text-dark mb-0">$1299</h5>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-2">
+                <p class="text-muted mb-0">Available: <span class="fw-bold">5</span></p>
+                <div class="ms-auto text-warning">
+                  <i class="fa fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mb-2">
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+          <div class="card">
+            <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
+              class="card-img-top" alt="Laptop" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                <p class="small text-danger"><s>$1099</s></p>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-3">
+                <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                <h5 class="text-dark mb-0">$999</h5>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-2">
+                <p class="text-muted mb-0">Available: <span class="fw-bold">6</span></p>
+                <div class="ms-auto text-warning">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mb-2">
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+            <div class="card">
+              <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/7.webp"
+                class="card-img-top" alt="Laptop" />
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                  <p class="small text-danger"><s>$1099</s></p>
+                </div>
+    
+                <div class="d-flex justify-content-between mb-3">
+                  <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                  <h5 class="text-dark mb-0">$999</h5>
+                </div>
+    
+                <div class="d-flex justify-content-between mb-2">
+                  <p class="text-muted mb-0">Available: <span class="fw-bold">6</span></p>
+                  <div class="ms-auto text-warning">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                  </div>
+                </div>
+  
+                <div class="d-flex justify-content-between mb-2">
+                  <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                  <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+          <div class="card">
+            <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/5.webp"
+              class="card-img-top" alt="Gaming Laptop" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                <p class="small text-danger"><s>$1399</s></p>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-3">
+                <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                <h5 class="text-dark mb-0">$1299</h5>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-2">
+                <p class="text-muted mb-0">Available: <span class="fw-bold">5</span></p>
+                <div class="ms-auto text-warning">
+                  <i class="fa fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mb-2">
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Features -->
+ 
+  <!-- Features -->
+ 
+  
+  <!-- Recommended -->
+  <section>
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+          <div class="card">
+            <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
+              class="card-img-top" alt="Laptop" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                <p class="small text-danger"><s>$1099</s></p>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-3">
+                <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                <h5 class="text-dark mb-0">$999</h5>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-2">
+                <p class="text-muted mb-0">Available: <span class="fw-bold">6</span></p>
+                <div class="ms-auto text-warning">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mb-2">
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+            <div class="card">
+              <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/7.webp"
+                class="card-img-top" alt="Laptop" />
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                  <p class="small text-danger"><s>$1099</s></p>
+                </div>
+    
+                <div class="d-flex justify-content-between mb-3">
+                  <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                  <h5 class="text-dark mb-0">$999</h5>
+                </div>
+    
+                <div class="d-flex justify-content-between mb-2">
+                  <p class="text-muted mb-0">Available: <span class="fw-bold">6</span></p>
+                  <div class="ms-auto text-warning">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                  </div>
+                </div>
+  
+                <div class="d-flex justify-content-between mb-2">
+                  <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                  <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+          <div class="card">
+            <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/5.webp"
+              class="card-img-top" alt="Gaming Laptop" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                <p class="small text-danger"><s>$1399</s></p>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-3">
+                <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                <h5 class="text-dark mb-0">$1299</h5>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-2">
+                <p class="text-muted mb-0">Available: <span class="fw-bold">5</span></p>
+                <div class="ms-auto text-warning">
+                  <i class="fa fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mb-2">
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="card p-4 " style="background-color: #3b71ca;">
+        <div class="row align-items-center">
+          <div class="col">
+            <h4 class="mb-0 text-white">Best products and brands in store</h4>
+            <p class="mb-0 text-white-50">Trendy products and text to build on the card title</p>
+          </div>
+          <div class="col-auto"><a class="btn btn-light text-primary shadow-0" href="#">Discover</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container py-5">
+      <div class="row">
+        <header class="mb-4">
+            <h3>Recommended</h3>
+        </header>
+        <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+          <div class="card">
+            <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
+              class="card-img-top" alt="Laptop" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                <p class="small text-danger"><s>$1099</s></p>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-3">
+                <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                <h5 class="text-dark mb-0">$999</h5>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-2">
+                <p class="text-muted mb-0">Available: <span class="fw-bold">6</span></p>
+                <div class="ms-auto text-warning">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mb-2">
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+            <div class="card">
+              <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/7.webp"
+                class="card-img-top" alt="Laptop" />
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                  <p class="small text-danger"><s>$1099</s></p>
+                </div>
+    
+                <div class="d-flex justify-content-between mb-3">
+                  <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                  <h5 class="text-dark mb-0">$999</h5>
+                </div>
+    
+                <div class="d-flex justify-content-between mb-2">
+                  <p class="text-muted mb-0">Available: <span class="fw-bold">6</span></p>
+                  <div class="ms-auto text-warning">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                  </div>
+                </div>
+  
+                <div class="d-flex justify-content-between mb-2">
+                  <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                  <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+          <div class="card">
+            <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
+                <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
+              </div>-->
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/5.webp"
+              class="card-img-top" alt="Gaming Laptop" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <p class="small"><a href="#!" class="text-muted text-decoration-none">Laptops</a></p>
+                <p class="small text-danger"><s>$1399</s></p>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-3">
+                <h5 class="mb-0 fw-bold"><a href="#" class="text-muted text-decoration-none">HP Notebook</a></h5>
+                <h5 class="text-dark mb-0">$1299</h5>
+              </div>
+  
+              <div class="d-flex justify-content-between mb-2">
+                <p class="text-muted mb-0">Available: <span class="fw-bold">5</span></p>
+                <div class="ms-auto text-warning">
+                  <i class="fa fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mb-2">
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
+                <a href="#!" class="btn btn-light border px-2 pt-2 float-end icon-hover"><i class="fas fa-shopping-cart fa-lg px-1 text-secondary"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- Recommended -->
+{% endblock %}
