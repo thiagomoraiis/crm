@@ -4,8 +4,9 @@
 {% block content %}
 <div class="container mt-5">
     <h1 class="mt-5">Product</h1>
-    <p>Deseja deletar esse produto?</p>
+    <p>Deseja deletar esse produto? "{{ product.name }}"</p>
     <form class="mt-4" action="" method="post">
+        {% csrf_token %}
         <!-- Submit button -->
         <div class="row justify-content-start">
             <div class="col-4">

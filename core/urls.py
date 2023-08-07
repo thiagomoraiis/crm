@@ -1,19 +1,50 @@
 from django.urls import path
 from .views import (IndexListView, DashboardTemplateView,
-                    ProductDetailView, RegisterTemplateView,
-                    ProductCreateView, ProductUpdateView,
-                    ProductDeleteView, ProductListView)
+                    RegisterTemplateView, ProductListView)
+from product.views import (ProductDetailView, ProductCreateView,
+                           ProductUpdateView, ProductDeleteView)
 
 
 app_name = 'core'
 
 urlpatterns = [
-    path('', IndexListView.as_view(), name='index'),
-    path('dashboard/', DashboardTemplateView.as_view(), name='dashboard'),
-    path('product/', ProductDetailView.as_view()),
-    path('register/', RegisterTemplateView.as_view()),
-    path('product-form/create/', ProductCreateView.as_view()),
-    path('product-form/update/', ProductUpdateView.as_view()),
-    path('product-form/delete/', ProductDeleteView.as_view()),
-    path('list/', ProductListView.as_view())
+    path(
+        '',
+        IndexListView.as_view(),
+        name='index'
+    ),
+    path(
+        'dashboard/',
+        DashboardTemplateView.as_view(),
+        name='dashboard'
+    ),
+    path(
+        'product/<slug:slug>/',
+        ProductDetailView.as_view(),
+        name='product-detail',
+    ),
+    path(
+        'register/',
+        RegisterTemplateView.as_view(),
+        name='register'
+    ),
+    path(
+        'product-form/create/',
+        ProductCreateView.as_view(),
+        name='product-create'),
+    path(
+        'product-form/update/<slug:slug>/',
+        ProductUpdateView.as_view(),
+        name='product-update'
+    ),
+    path(
+        'product-form/delete/<slug:slug>/',
+        ProductDeleteView.as_view(),
+        name='product-delete'
+    ),
+    path(
+        'list/',
+        ProductListView.as_view(),
+        name='product-list'
+    )
 ]
