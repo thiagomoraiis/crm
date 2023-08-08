@@ -3,6 +3,7 @@ from .views import (IndexListView, DashboardTemplateView,
                     RegisterTemplateView, ProductListView)
 from product.views import (ProductDetailView, ProductCreateView,
                            ProductUpdateView, ProductDeleteView)
+from cart.views import CartListView
 
 
 app_name = 'core'
@@ -46,5 +47,10 @@ urlpatterns = [
         'list/',
         ProductListView.as_view(),
         name='product-list'
+    ),
+    path(
+        'cart/',
+        CartListView.as_view(),
+        name='cart'
     )
 ]

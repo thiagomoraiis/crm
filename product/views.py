@@ -63,7 +63,7 @@ class ProductCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def test_func(self):
-        return self.request.user.is_superuser and self.request.user.is_staff
+        return self.request.user.is_superuser
 
 
 class ProductUpdateView(UserPassesTestMixin, UpdateView):
@@ -80,7 +80,7 @@ class ProductUpdateView(UserPassesTestMixin, UpdateView):
     success_url = reverse_lazy('core:product-list')
 
     def test_func(self):
-        return self.request.user.is_superuser and self.request.user.is_staff
+        return self.request.user.is_staff
 
 
 class ProductDeleteView(UserPassesTestMixin, DeleteView):
@@ -92,4 +92,4 @@ class ProductDeleteView(UserPassesTestMixin, DeleteView):
     slug_url_kwarg = 'slug'
 
     def test_func(self):
-        return self.request.user.is_superuser and self.request.user.is_staff
+        return self.request.user.is_staff
