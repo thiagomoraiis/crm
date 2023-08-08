@@ -1,5 +1,4 @@
 from django.db import models
-# from django.contrib.auth.models import User
 from custom_user.models import CustomUser
 from product.models import Product
 
@@ -12,13 +11,13 @@ class Cart(models.Model):
     cart_product = models.ManyToManyField(
         Product, through='CartItem'
     )
-    status = models.CharField(
-        max_length=20,
-        choices=(('open', 'Open'), ('close', 'Close'))
-    )
+    # status = models.CharField(
+    #     max_length=20,
+    #     choices=(('open', 'Open'), ('close', 'Close'))
+    # )
 
     def __str__(self):
-        return f'{self.cart_product}'
+        return f'{self.cart_product.name}'
 
 
 class CartItem(models.Model):
@@ -30,7 +29,15 @@ class CartItem(models.Model):
         Cart, on_delete=models.CASCADE
     )
     quantity = models.PositiveIntegerField('Cart Quantity')
-    total_cart_item = models.PositiveIntegerField('Total Item Price')
+    total_price_item = models.DecimalField(
+        'Total Item Price', max_digits=10, decimal_places=2,
+        default=0.00
+    )
 
     def __str__(self):
-        return f'{self.product_item}'
+        return f'{self.product_item.name}'
+
+    def save(self, *args, **kwargs):
+        if not self.total_price_item:
+            self.total_price_item = self.quantity * self.product_item.price
+        return super().save(*args, **kwargs)

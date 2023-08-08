@@ -1,10 +1,14 @@
 from django.shortcuts import render, get_object_or_404 # noqa
 from django.views.generic import (TemplateView, ListView)
+from django.contrib.auth.mixins import UserPassesTestMixin
 from product.models import Product
 
 
-class DashboardTemplateView(TemplateView):
+class DashboardTemplateView(UserPassesTestMixin, TemplateView):
     template_name = 'core/pages/dashboard.html'
+
+    def test_func(self):
+        return self.request.user.is_superuser and self.request.user.is_staff
 
 
 class IndexListView(ListView):
@@ -23,7 +27,10 @@ class RegisterTemplateView(TemplateView):
     template_name = 'core/pages/register.html'
 
 
-class ProductListView(ListView):
+class ProductListView(UserPassesTestMixin, ListView):
     template_name = 'core/pages/list_products.html'
     context_object_name = 'products'
     queryset = Product.objects.all()
+
+    def test_func(self):
+        return self.request.user.is_superuser and self.request.user.is_staff

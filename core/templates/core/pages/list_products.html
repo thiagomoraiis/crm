@@ -42,7 +42,7 @@
                 <td>
                   <span class="badge badge-success rounded-pill d-inline">{{ i.stock }}</span>
                 </td>
-                <td>{{ i.posted_by }}</td>
+                <td>{{ i.posted_by.username }}</td>
                 <td>
                     <a href="{% url 'core:product-update' i.slug %}" class="btn btn-primary btn-rounded btn-sm fw-bold">Edit</a>
                     <a href="{% url 'core:product-delete' i.slug %}" class="btn btn-danger btn-rounded btn-sm fw-bold">Delete</a>

@@ -1,0 +1,7 @@
+ # cart, created = Cart.objects.get_or_create(
+        #     cart_owner=self.request.user, status='open',
+        # )
+        # item_cart, created = CartItem.objects.get_or_create(
+        #     product_item=product, cart=cart,
+        #     quantity=quantity, defaults={'total_cart_item': 0}
+        # )

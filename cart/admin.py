@@ -13,4 +13,4 @@ class CartAdmin(admin.ModelAdmin):
 
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
-    list_display = ('product_item', 'cart', 'quantity', 'total_cart_item')
+    list_display = ('product_item', 'cart', 'quantity', 'total_price_item')

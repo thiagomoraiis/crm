@@ -78,13 +78,13 @@
   
             <hr />
   
-            <div class="row mb-4 justify-content-between">
-            
+            <form method="post" action="" class="row mb-4 justify-content-between">
+              {% csrf_token %}
               <!-- col.// -->
               <label class="mb-2 d-block">Quantity</label>
 
               <div class="col-md-4 col-6 mb-3">
-                  <form class="input-group mb-3 d-flex" style="width: 170px;">
+                  <div class="input-group mb-3 d-flex" style="width: 170px;">
                     <div class="d-flex">
                       <button onclick="less();" class="btn btn-white border px-3" type="button" id="decrement" data-mdb-ripple-color="dark">
                         <i class="fas fa-minus"></i>
@@ -94,16 +94,16 @@
                         <i class="fas fa-plus"></i>
                       </button>
                     </div>
-                  </form>
-                </div>
-                <div class="col-6 mb-3">
-                    <form class="" >
-                      <div class="input-group mb-3 d-flex">
-                          <a href="#" class="btn d-inline-block h-auto shadow-0 text-white py-2 me-1" style="background-color: #3b71ca;"><i class="fas fa-shopping-cart m-1 me-md-2"></i> Add to cart </a>
-                          <a href="#" class="btn d-inline-block h-auto btn-danger border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a>
-                        </div>
-                    </form>
                   </div>
+              </div>
+              <div class="col-6 mb-3">
+                    <div class="" >
+                      <div class="input-group mb-3 d-flex">
+                          <button type="submit" class="btn d-inline-block h-auto shadow-0 text-white py-2 me-1" style="background-color: #3b71ca;"><i class="fas fa-shopping-cart m-1 me-md-2"></i> Add to cart </button>
+                          <button type="submit" href="#" class="btn d-inline-block h-auto btn-danger border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Save </button>
+                      </div>
+                    </div>
+              </div>
                <!-- <div class="col col-6 d-flex mb-5 mt-4">
                     <div class="input-group d-flex align-items-top">
                       <a href="#" class="btn d-inline-block h-auto shadow-0 text-white py-2" style="background-color: #3b71ca;"><i class="fas fa-shopping-cart m-1 me-md-2"></i> Add to cart </a>
@@ -116,7 +116,7 @@
                       <option>Large</option>
                     </select>-->
                  <!-- </div>-->
-            </div>
+            </form>
           </div>
         </main>
       </div>

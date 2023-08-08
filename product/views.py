@@ -1,21 +1,72 @@
-# from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from product.models import Product
-# from .forms import ProductModelForm
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import (
-                DeleteView, DetailView,
-                CreateView, UpdateView)
+from django.views.generic import (DeleteView, View,
+                                  CreateView, UpdateView)
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from cart.models import Cart, CartItem
 
 
-class ProductDetailView(DetailView):
-    template_name = 'core/pages/product.html'
+class ProductDetailView(View):
+    def get_product(self, request, slug):
+        product = get_object_or_404(
+            Product, slug=slug
+        )
+        return product
+
+    @method_decorator(login_required, name='post')
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, slug):
+        product = self.get_product(request, slug)
+        context = {'product': product}
+        return render(request, 'core/pages/product.html', context)
+
+    def post(self, request, slug):
+        product = self.get_product(request, slug)
+        quantity = int(self.request.POST.get('quantity', '1'))
+        cart, created = Cart.objects.get_or_create(
+            cart_owner=self.request.user
+        )
+        item_cart, created = CartItem.objects.get_or_create(
+            product_item=product, cart=cart,
+            quantity=quantity
+        )
+
+        product.stock -= quantity
+        product.save()
+        return render(request, 'core/pages/product.html', {'product': product})
+
+# class ProductDetailView(DetailView):
+#     template_name = 'core/pages/product.html'
+#     model = Product
+#     context_object_name = 'product'
+#     slug_field = 'slug'
+#     slug_url_kwarg = 'slug'
+
+
+class ProductCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
+    template_name = 'core/pages/product_form.html'
+    fields = [
+        'name', 'price', 'description',
+        'stock', 'image', 'category',
+        'tags'
+    ]
     model = Product
-    context_object_name = 'product'
-    slug_field = 'slug'
-    slug_url_kwarg = 'slug'
+    success_url = reverse_lazy('core:product-list')
+
+    def form_valid(self, form):
+        form.instance.posted_by = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        return self.request.user.is_superuser and self.request.user.is_staff
 
 
-class ProductCreateView(CreateView):
+class ProductUpdateView(UserPassesTestMixin, UpdateView):
     template_name = 'core/pages/product_form.html'
     fields = [
         'name', 'price', 'description',
@@ -23,27 +74,22 @@ class ProductCreateView(CreateView):
         'posted_by', 'tags'
     ]
     model = Product
-    success_url = reverse_lazy('core:product-list')
-
-
-class ProductUpdateView(UpdateView):
-    template_name = 'core/pages/product_form.html'
-    fields = [
-        'name', 'price', 'description',
-        'stock', 'image', 'category',
-        'posted_by', 'tags'
-    ]
-    model = Product
     context_object_name = 'product'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
     success_url = reverse_lazy('core:product-list')
 
+    def test_func(self):
+        return self.request.user.is_superuser and self.request.user.is_staff
 
-class ProductDeleteView(DeleteView):
+
+class ProductDeleteView(UserPassesTestMixin, DeleteView):
     model = Product
     template_name = 'core/pages/product_delete.html'
     success_url = reverse_lazy('core:product-list')
     context_object_name = 'product'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
+
+    def test_func(self):
+        return self.request.user.is_superuser and self.request.user.is_staff
