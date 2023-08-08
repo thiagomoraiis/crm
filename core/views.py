@@ -3,8 +3,8 @@ from django.views.generic import (TemplateView, ListView)
 from django.contrib.auth.mixins import UserPassesTestMixin
 from product.models import Product
 from cart.models import Cart, CartItem
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
+# from django.utils.decorators import method_decorator
+# from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.core.exceptions import ObjectDoesNotExist
 

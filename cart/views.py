@@ -1,4 +1,3 @@
-from typing import Any, Dict
 from django.views.generic import ListView
 from cart.models import Cart, CartItem
 
