@@ -86,11 +86,11 @@
               <div class="col-md-4 col-6 mb-3">
                   <form class="input-group mb-3 d-flex" style="width: 170px;">
                     <div class="d-flex">
-                      <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
+                      <button onclick="less();" class="btn btn-white border px-3" type="button" id="decrement" data-mdb-ripple-color="dark">
                         <i class="fas fa-minus"></i>
                       </button>
-                      <input type="text" class="form-control text-center border border-secondary" placeholder="14" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1" />
-                      <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                      <input type="number" class="form-control text-center border" id="quantity" placeholder="14" aria-label="Example text with button addon" aria-describedby="button-addon1" value="1" />
+                      <button onclick="more();" class="btn btn-white border px-3" type="button" id="increment" data-mdb-ripple-color="dark">
                         <i class="fas fa-plus"></i>
                       </button>
                     </div>
@@ -274,4 +274,5 @@
       </div>
     </div>
   </section>
+  <script src="{% static 'core/js/scripts.js' %}"></script>
 {% endblock %}
