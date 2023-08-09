@@ -7,14 +7,6 @@ from decimal import Decimal
 DISCOUNT_PERCENTAGE = 10
 
 
-# class Discounts(models.Model):
-#     name = models.CharField(max_length=100)
-#     value = models.DecimalField(max_digits=5, decimal_places=2)
-#
-#     def __str__(self):
-#         return self.name
-
-
 class Tag(models.Model):
     name = models.CharField(max_length=50)
 
@@ -73,12 +65,3 @@ class Product(models.Model):
             self.discount_price = discount_price
             print(self.discount_price)
         return super().save(*args, **kwargs)
-
-    # def get_discount_price(self):
-    #     discount_price = Discounts.objects.first()
-    #     if discount_price:
-    #         discount_value = discount_price.value
-    #         self.discount_price = self.price * (discount_value / 100)
-    #         return self.discount_price
-#
-    #     return self.discount_price

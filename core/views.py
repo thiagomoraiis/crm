@@ -31,10 +31,12 @@ class IndexListView(ListView):
         if self.request.user.is_authenticated:
             try:
                 cart = Cart.objects.get(cart_owner=self.request.user)
-                total_product_in_cart = CartItem.objects.filter(
-                    cart=cart).aggregate(Sum('quantity'))['quantity__sum']
+                cart_items = CartItem.objects.filter(cart=cart)
+                total_product_in_cart = cart_items.aggregate(
+                    Sum('quantity'))['quantity__sum']
+
                 context['total_product_in_cart'] = total_product_in_cart
-                print(self.request.user)
+                context['cart_items'] = cart_items.count()
                 return context
             except ObjectDoesNotExist:
                 return context

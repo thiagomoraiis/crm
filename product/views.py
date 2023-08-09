@@ -27,7 +27,7 @@ class ProductDetailView(View):
 
     def post(self, request, slug):
         product = self.get_product(request, slug)
-        quantity = int(self.request.POST.get('quantity', '1'))
+        quantity = int(self.request.POST.get('quantity', ''))
         cart, created = Cart.objects.get_or_create(
             cart_owner=self.request.user
         )
@@ -38,6 +38,8 @@ class ProductDetailView(View):
 
         product.stock -= quantity
         product.save()
+        # item_cart.quantity += quantity
+        # item_cart.save()
         return render(request, 'core/pages/product.html', {'product': product})
 
 # class ProductDetailView(DetailView):
