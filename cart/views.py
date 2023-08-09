@@ -11,8 +11,12 @@ class CartListView(ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             try:
-                cart = Cart.objects.get(cart_owner=self.request.user)
-                cart_items = CartItem.objects.filter(cart=cart)
+                cart = Cart.objects.get(
+                    cart_owner=self.request.user
+                )
+                cart_items = CartItem.objects.filter(
+                    cart=cart
+                )
                 return cart_items
             except ObjectDoesNotExist:
                 return super().self.get_queryset()

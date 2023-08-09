@@ -33,19 +33,16 @@ class ProductDetailView(View):
             cart_owner=self.request.user
         )
 
-        # Verificar se o item já existe no carrinho
         item_cart = CartItem.objects.filter(
             product_item=product, cart=cart
         ).first()
 
         if item_cart:
-            # Atualizar a quantidade do item existente
             item_cart.quantity += quantity
             item_cart.total_price_item = \
                 item_cart.quantity * item_cart.product_item.price
             item_cart.save()
         else:
-            # Criar um novo item no carrinho
             item_cart = CartItem.objects.create(
                 product_item=product, cart=cart,
                 quantity=quantity
@@ -58,13 +55,6 @@ class ProductDetailView(View):
             raise ValidationError('Stock Insuficiente')
 
         return render(request, 'core/pages/product.html', {'product': product})
-
-# class ProductDetailView(DetailView):
-#     template_name = 'core/pages/product.html'
-#     model = Product
-#     context_object_name = 'product'
-#     slug_field = 'slug'
-#     slug_url_kwarg = 'slug'
 
 
 class ProductCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):

@@ -11,10 +11,6 @@ class Cart(models.Model):
     cart_product = models.ManyToManyField(
         Product, through='CartItem'
     )
-    # status = models.CharField(
-    #     max_length=20,
-    #     choices=(('open', 'Open'), ('close', 'Close'))
-    # )
 
     def __str__(self):
         return f'{self.cart_product.name}'
@@ -28,7 +24,9 @@ class CartItem(models.Model):
     cart = models.ForeignKey(
         Cart, on_delete=models.CASCADE
     )
-    quantity = models.PositiveIntegerField('Cart Quantity')
+    quantity = models.PositiveIntegerField(
+        'Cart Quantity'
+    )
     total_price_item = models.DecimalField(
         'Total Item Price', max_digits=10, decimal_places=2,
         default=0.00

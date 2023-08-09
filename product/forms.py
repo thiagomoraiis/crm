@@ -10,9 +10,3 @@ class ProductModelForm(forms.ModelForm):
             'stock', 'image', 'category',
             'tags'
         )
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(self, *args, **kwargs)
-#
-    #    for field_name, field in self.fields.items():
-    #        field.widgets.attrs['class'] = 'form-control'

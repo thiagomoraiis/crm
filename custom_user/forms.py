@@ -11,13 +11,31 @@ class UserRegisterModelForm(forms.ModelForm):
             'office', 'password'
         )
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'telephone': forms.TextInput(attrs={'class': 'form-control'}),
-            'city': forms.TextInput(attrs={'class': 'form-control'}),
-            'address': forms.TextInput(attrs={'class': 'form-control'}),
-            'office': forms.TextInput(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'username': forms.TextInput(
+                attrs={'class': 'form-control'}
+            ),
+            'first_name': forms.TextInput(
+                attrs={'class': 'form-control'}
+            ),
+            'last_name': forms.TextInput(
+                attrs={'class': 'form-control'}
+            ),
+            'email': forms.EmailInput(
+                attrs={'class': 'form-control'}
+            ),
+            'telephone': forms.TextInput(
+                attrs={'class': 'form-control'}
+            ),
+            'city': forms.TextInput(
+                attrs={'class': 'form-control'}
+            ),
+            'address': forms.TextInput(
+                attrs={'class': 'form-control'}
+            ),
+            'office': forms.TextInput(
+                attrs={'class': 'form-control'}
+            ),
+            'password': forms.PasswordInput(
+                attrs={'class': 'form-control'}
+            ),
         }

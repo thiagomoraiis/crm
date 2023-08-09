@@ -22,16 +22,16 @@ class IndexListView(ListView):
     model = Product
     queryset = Product.objects.all()
 
-    # @method_decorator(login_required, name='post')
-    # def dispatch(self, request, *args, **kwargs):
-    #     return super().dispatch(request, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             try:
-                cart = Cart.objects.get(cart_owner=self.request.user)
-                cart_items = CartItem.objects.filter(cart=cart)
+                cart = Cart.objects.get(
+                    cart_owner=self.request.user
+                )
+                cart_items = CartItem.objects.filter(
+                    cart=cart
+                )
                 total_product_in_cart = cart_items.aggregate(
                     Sum('quantity'))['quantity__sum']
 

@@ -9,21 +9,27 @@ DISCOUNT_PERCENTAGE = 10
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(
+        max_length=50
+    )
 
     def __str__(self) -> str:
         return self.name
 
 
 class ProductCategory(models.Model):
-    category_name = models.CharField('Product Category', max_length=50)
+    category_name = models.CharField(
+        'Product Category', max_length=50
+    )
 
     def __str__(self):
         return self.category_name
 
 
 class Product(models.Model):
-    name = models.CharField('Name of Product', max_length=150)
+    name = models.CharField(
+        'Name of Product', max_length=150
+    )
     price = models.DecimalField(
         'Price', max_digits=7,
         decimal_places=2
@@ -32,9 +38,15 @@ class Product(models.Model):
         'Discount Price', max_digits=7,
         decimal_places=2, blank=True, default=0.00
     )
-    description = models.TextField('Description of roduct')
-    stock = models.PositiveIntegerField('Product Stock')
-    image = models.ImageField(upload_to='product')
+    description = models.TextField(
+        'Description of roduct'
+    )
+    stock = models.PositiveIntegerField(
+        'Product Stock'
+    )
+    image = models.ImageField(
+        upload_to='product'
+    )
     slug = models.SlugField(
         'Slug', editable=False,
         unique=True, blank=True
@@ -45,8 +57,12 @@ class Product(models.Model):
     posted_by = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE
     )
-    creation_date = models.DateField(auto_now_add=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    creation_date = models.DateField(
+        auto_now_add=True
+    )
+    tags = models.ManyToManyField(
+        Tag, blank=True
+    )
 
     def __str__(self) -> str:
         return self.name
@@ -58,7 +74,9 @@ class Product(models.Model):
 
         if not self.discount_price:
             discount_price = self.discount_price
-            discount_price = (Decimal(str(round(DISCOUNT_PERCENTAGE / 100, 2)))) * self.price # noqa
+            discount_price = (Decimal(str(
+                round(DISCOUNT_PERCENTAGE / 100, 2)
+            ))) * self.price
             self.discount_price = discount_price
             print(self.discount_price)
 
