@@ -46,3 +46,61 @@
 #     context_object_name = 'product'
 #     slug_field = 'slug'
 #     slug_url_kwarg = 'slug'
+
+class ProductDetailView(View):
+    def get_product(self, request, slug):
+        product = get_object_or_404(
+            Product, slug=slug
+        )
+        return product
+
+    @method_decorator(login_required, name='post')
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, slug):
+        product = self.get_product(request, slug)
+        context = {'product': product}
+        return render(request, 'core/pages/product.html', context)
+
+    def post(self, request, slug):
+        product = self.get_product(request, slug)
+        quantity = int(self.request.POST.get('quantity', ''))
+        cart, created = Cart.objects.get_or_create(
+            cart_owner=self.request.user
+        )
+        item_cart, created = CartItem.objects.get_or_create(
+            product_item=product, cart=cart,
+            quantity=quantity
+        )
+
+        product.stock -= quantity
+        product.save()
+        item_cart.quantity += quantity
+        item_cart.save()
+        return render(request, 'core/pages/product.html', {'product': product})
+
+def post(self, request, slug):
+        product = self.get_product(request, slug)
+        quantity = int(self.request.POST.get('quantity', ''))
+        cart, created = Cart.objects.get_or_create(
+            cart_owner=self.request.user
+        )
+
+        item_cart = CartItem.objects.filter(
+            product_item=product, cart=cart,
+            quantity=quantity
+        ).first()
+
+        if item_cart:
+            item_cart.quantity += quantity
+            item_cart.save()
+        else:
+            item_cart = CartItem.objects.create(
+                product_item=product, cart=cart,
+                quantity=quantity
+            )
+
+        product.stock -= quantity
+        product.save()
+        return render(request, 'core/pages/product.html', {'product': product})

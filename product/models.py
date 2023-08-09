@@ -2,6 +2,7 @@ from django.db import models
 from custom_user.models import CustomUser
 from django.template.defaultfilters import slugify
 from decimal import Decimal
+from uuid import uuid1
 
 
 DISCOUNT_PERCENTAGE = 10
@@ -52,16 +53,13 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = f'{slugify(self.name)}'
-        slug = self.slug
-        counter = 1
-        while self.__class__.objects.filter(slug=self.slug).exists():
-            self.slug = f'{slug}-{counter}'
-            counter += 1
+            unique_uuid = uuid1()
+            self.slug = f'{slugify(self.name)}-{unique_uuid}'
 
         if not self.discount_price:
             discount_price = self.discount_price
             discount_price = (Decimal(str(round(DISCOUNT_PERCENTAGE / 100, 2)))) * self.price # noqa
             self.discount_price = discount_price
             print(self.discount_price)
+
         return super().save(*args, **kwargs)

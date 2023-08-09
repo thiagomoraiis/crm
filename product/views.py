@@ -7,6 +7,7 @@ from django.views.generic import (DeleteView, View,
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from cart.models import Cart, CartItem
+from django.core.exceptions import ValidationError
 
 
 class ProductDetailView(View):
@@ -31,15 +32,31 @@ class ProductDetailView(View):
         cart, created = Cart.objects.get_or_create(
             cart_owner=self.request.user
         )
-        item_cart, created = CartItem.objects.get_or_create(
-            product_item=product, cart=cart,
-            quantity=quantity
-        )
 
-        product.stock -= quantity
-        product.save()
-        # item_cart.quantity += quantity
-        # item_cart.save()
+        # Verificar se o item já existe no carrinho
+        item_cart = CartItem.objects.filter(
+            product_item=product, cart=cart
+        ).first()
+
+        if item_cart:
+            # Atualizar a quantidade do item existente
+            item_cart.quantity += quantity
+            item_cart.total_price_item = \
+                item_cart.quantity * item_cart.product_item.price
+            item_cart.save()
+        else:
+            # Criar um novo item no carrinho
+            item_cart = CartItem.objects.create(
+                product_item=product, cart=cart,
+                quantity=quantity
+            )
+
+        if product.stock >= quantity:
+            product.stock -= quantity
+            product.save()
+        else:
+            raise ValidationError('Stock Insuficiente')
+
         return render(request, 'core/pages/product.html', {'product': product})
 
 # class ProductDetailView(DetailView):
