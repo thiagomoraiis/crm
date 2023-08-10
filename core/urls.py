@@ -3,7 +3,7 @@ from .views import (IndexListView, DashboardTemplateView,
                     RegisterTemplateView, ProductListView)
 from product.views import (ProductDetailView, ProductCreateView,
                            ProductUpdateView, ProductDeleteView)
-from cart.views import CartListView
+from cart.views import CartView, remove_item
 
 
 app_name = 'core'
@@ -50,7 +50,8 @@ urlpatterns = [
     ),
     path(
         'cart/',
-        CartListView.as_view(),
+        CartView.as_view(),
         name='cart'
-    )
+    ),
+    path('cart/remove/<int:id>/', remove_item, name='remove-cart')
 ]
