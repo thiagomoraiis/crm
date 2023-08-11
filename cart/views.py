@@ -63,12 +63,13 @@ class CartView(View):
             historic_item = HistoricItem.objects.create( # noqa
                 historic=historic, product=cart_item.product_item
             )
+        product_cart.delete()
 
         return render(
             request, 'cart/pages/cart.html',
             {'products': product_cart,
              'quantity': product_cart.count(),
-             'total_price_cart': round(total_price_cart, 2),
+             # 'total_price_cart': round(total_price_cart, 2),
              }
         )
 
