@@ -1,5 +1,20 @@
 from django.contrib import admin
 from .models import Cart, CartItem
+from customer.models import HistoricItem, PurchaseHistoric
+
+
+class HistoricItemInline(admin.TabularInline):
+    model = HistoricItem
+
+
+@admin.register(PurchaseHistoric)
+class PurchaseHistoricAdmin(admin.ModelAdmin):
+    inlines = [HistoricItemInline]
+
+
+@admin.register(HistoricItem)
+class HistoricItemAdmin(admin.ModelAdmin):
+    list_display = ('product', 'date')
 
 
 class CartItemInline(admin.TabularInline):
