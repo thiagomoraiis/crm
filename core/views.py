@@ -6,7 +6,7 @@ from product.models import Product
 from cart.models import Cart, CartItem
 # from django.utils.decorators import method_decorator
 # from django.contrib.auth.decorators import login_required
-from django.db.models import Sum
+from django.db.models import Sum # noqa
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -31,24 +31,30 @@ class IndexListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        self.add_cart_to_context(context)
+        return context
+
+    def add_cart_to_context(self, context):
         if self.request.user.is_authenticated:
-            try:
-                cart = Cart.objects.get(
-                    cart_owner=self.request.user
-                )
-                cart_items = CartItem.objects.filter(
-                    cart=cart
-                )
+            cart, cart_items = self.get_cart_info()
+
+            if cart:
                 total_product_in_cart = cart_items.aggregate(
                     Sum('quantity'))['quantity__sum']
-
                 context['total_product_in_cart'] = total_product_in_cart
                 context['cart_items'] = cart_items.count()
-                return context
-            except ObjectDoesNotExist:
-                return context
-        else:
-            return context
+
+    def get_cart_info(self):
+        try:
+            cart = Cart.objects.get(
+                cart_owner=self.request.user
+            )
+            cart_items = CartItem.objects.filter(
+                cart=cart
+            )
+            return cart, cart_items
+        except ObjectDoesNotExist:
+            return None, None
 
 
 class RegisterTemplateView(TemplateView):
