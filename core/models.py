@@ -2,7 +2,7 @@ from django.db import models # noqa
 from custom_user.models import CustomUser
 
 
-class Invoicing(models.Model):
+class Transactions(models.Model):
     CHOICES_TYPE_REVENUE = (
         ('revenue', 'Revenue'),
         ('expense', 'Expense')
@@ -20,12 +20,16 @@ class Invoicing(models.Model):
         auto_now_add=True
     )
     value = models.DecimalField(
-        max_digits=22, decimal_places=2
+        max_digits=8, decimal_places=2
     )
     client = models.ForeignKey(
         CustomUser, on_delete=models.SET_NULL,
-        null=True, blank=True, default=''
+        null=True, blank=True
     )
 
     def __str__(self) -> str:
-        return f'{self.title} - {self.value} - {self.client.username}'
+        return f'{self.title} - {self.value} - {self.client}'
+
+
+class Invoicing(models.Model):
+    total_value = models.DecimalField(max_digits=22, decimal_places=2)

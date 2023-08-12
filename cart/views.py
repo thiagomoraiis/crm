@@ -3,9 +3,8 @@ from django.views.generic import View
 from cart.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
-from core.models import Invoicing
+from core.models import Invoicing, Transactions
 from customer.models import PurchaseHistoric, HistoricItem
-# from core.models import Revenue
 # from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.utils.decorators import method_decorator
 # from django.contrib.auth.decorators import login_required
@@ -52,9 +51,16 @@ class CartView(View):
             total_price_sum=Sum('total_price_item')
         )['total_price_sum']
 
-        invoicing = Invoicing.objects.create( # noqa
+        transactions = Transactions.objects.create( # noqa
             value=total_price_cart, client=self.request.user
         )
+        invoicing = Invoicing.objects.filter().first()
+        if invoicing:
+            invoicing.total_value += transactions.value
+            invoicing.save()
+        else:
+            value_invoicing = transactions.value
+            invoicing = Invoicing.objects.create(total_value=value_invoicing)
 
         historic, created = PurchaseHistoric.objects.get_or_create(
             owner=self.request.user

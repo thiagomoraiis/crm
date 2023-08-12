@@ -24,7 +24,6 @@ class CartItemInline(admin.TabularInline):
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
     inlines = [CartItemInline]
-    list_display = ('cart_owner',)
 
 
 @admin.register(CartItem)

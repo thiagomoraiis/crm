@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import (IndexListView, DashboardTemplateView,
-                    RegisterTemplateView, ProductListView)
+                    RegisterTemplateView, ProductListView,
+                    TransactionsListView)
 from product.views import (ProductDetailView, ProductCreateView,
                            ProductUpdateView, ProductDeleteView)
 from cart.views import CartView, remove_item
@@ -53,5 +54,14 @@ urlpatterns = [
         CartView.as_view(),
         name='cart'
     ),
-    path('cart/remove/<int:id>/', remove_item, name='remove-cart')
+    path(
+        'cart/remove/<int:id>/',
+        remove_item,
+        name='remove-cart'
+    ),
+    path(
+        'invoicing',
+        TransactionsListView.as_view(),
+        name='invoicing'
+    )
 ]
