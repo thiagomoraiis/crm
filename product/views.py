@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from cart.models import Cart, CartItem
 from django.core.exceptions import ValidationError
+from django.contrib import messages
 
 
 class ProductDetailView(View):
@@ -52,7 +53,9 @@ class ProductDetailView(View):
             product.stock -= quantity
             product.save()
         else:
-            raise ValidationError('Stock Insuficiente')
+            raise ValidationError(
+                messages.error(self.request, 'Stock Insuficiente')
+            )
 
         return render(request, 'core/pages/product.html', {'product': product})
 

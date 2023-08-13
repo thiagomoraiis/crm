@@ -60,8 +60,8 @@ urlpatterns = [
         name='remove-cart'
     ),
     path(
-        'invoicing',
+        'transactions/',
         TransactionsListView.as_view(),
-        name='invoicing'
+        name='transactions'
     )
 ]

@@ -9,8 +9,16 @@
         <header class="mb-4">
             <h3>New products</h3>
         </header>
+        <h2>Lista de Produtos</h2>
+        <ul>
+            {% for i in product %}
+                <li>{{ i.name }}</li>
+            {% empty %}
+                <li>Nenhum produto encontrado.</li>
+            {% endfor %}
+        </ul>
         {% for i in products %}
-          <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+          <div class="col-md-12 col-lg-4 mb-4 mb-lg-0 mt-4">
             <div class="card">
               <!--<div class="d-flex justify-content-start align-items-start h-100 m-2">
                   <h6><span class="badge pt-1" style="background-color: #3b71ca;">New</span></h6>
@@ -50,6 +58,27 @@
             </div>
           </div>
         {% endfor %}
+
+        <div class="pagination d-flex justify-content-end my-3">
+          <span class="step-links">
+              {% if page_obj.has_previous %}
+                  <!--<a href="?page=1">&laquo; first</a>-->
+                  <a class="text-decoration-none" style="color:#3b71ca;" href="?page={{ page_obj.previous_page_number }}"><<{{ page_obj.previous_page_number }}</a>
+              {% endif %}
+      
+              <!--<span class="current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>-->
+              <span class="current btn btn-primary mx-3" style="background-color:#3b71ca;">
+                {{ page_obj.number }}
+              </span>
+      
+              {% if page_obj.has_next %}
+                  <a class="text-decoration-none" style="color:#3b71ca;" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}>></a>
+                  <!--<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>-->
+              {% endif %}
+          </span>
+      </div>
 
 
 

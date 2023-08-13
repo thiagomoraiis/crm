@@ -104,3 +104,15 @@ def post(self, request, slug):
         product.stock -= quantity
         product.save()
         return render(request, 'core/pages/product.html', {'product': product})
+
+class DashboardTemplateView(UserPassesTestMixin, ListView):
+    template_name = 'core/pages/dashboard.html'
+    queryset = Invoicing.objects.values('total_value')
+    context_object_name = 'total'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.first()['total_value']
+
+    def test_func(self):
+        return self.request.user.is_staff

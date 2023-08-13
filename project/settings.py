@@ -42,22 +42,24 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'bootstrap5',
+    'corsheaders',
 
     'custom_user',
     'core',
     'customer',
     'administrator',
-    'tasks',
+    # 'tasks',
     'contacts',
-    'opportunities',
+    # 'opportunities',
     'cart',
     'product',
-    'interactions',
+    # 'interactions',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -115,6 +117,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5500",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

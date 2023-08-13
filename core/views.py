@@ -1,23 +1,32 @@
 from django.shortcuts import render, get_object_or_404 # noqa
 from django.views.generic import (TemplateView, ListView)
 from django.contrib.auth.mixins import UserPassesTestMixin
-from core.models import Transactions, Invoicing
+from core.models import Transactions
 from product.models import Product
 from cart.models import Cart, CartItem
 # from django.utils.decorators import method_decorator
 # from django.contrib.auth.decorators import login_required
 from django.db.models import Sum # noqa
 from django.core.exceptions import ObjectDoesNotExist
+from datetime import datetime
 
 
 class DashboardTemplateView(UserPassesTestMixin, ListView):
     template_name = 'core/pages/dashboard.html'
-    queryset = Invoicing.objects.values('total_value')
+    # queryset = Invoicing.objects.values('total_value')
+    queryset = Transactions.objects.values('value', 'date')
     context_object_name = 'total'
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.first()['total_value']
+        current_month = datetime.today().month
+        qs.values('value', 'date').filter(date__month=current_month)
+
+        qs = round(qs.values('value').aggregate(
+            sum_value=Sum('value')
+        )['sum_value'], 2)
+
+        return qs
 
     def test_func(self):
         return self.request.user.is_staff
@@ -28,10 +37,12 @@ class IndexListView(ListView):
     context_object_name = 'products'
     model = Product
     queryset = Product.objects.all()
+    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         self.add_cart_to_context(context)
+
         return context
 
     def add_cart_to_context(self, context):
@@ -71,7 +82,8 @@ class ProductListView(UserPassesTestMixin, ListView):
 
 
 class TransactionsListView(ListView):
-    template_name = 'core/pages/invoicing_list.html'
+    template_name = 'core/pages/transactions_list.html'
     model = Transactions
     queryset = Transactions.objects.all()
     context_object_name = 'transactions'
+    paginate_by = 9
