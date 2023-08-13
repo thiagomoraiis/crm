@@ -1,6 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from administrator.models import Office
+
+
+class Office(models.Model):
+    name = models.CharField(
+        max_length=150
+    )
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class CustomUser(AbstractUser):

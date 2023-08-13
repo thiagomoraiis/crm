@@ -47,13 +47,13 @@ INSTALLED_APPS = [
     'custom_user',
     'core',
     'customer',
-    'administrator',
-    # 'tasks',
     'contacts',
-    # 'opportunities',
     'cart',
     'product',
+    # 'opportunities',
     # 'interactions',
+    # 'administrator',
+    # 'tasks',
 ]
 
 MIDDLEWARE = [

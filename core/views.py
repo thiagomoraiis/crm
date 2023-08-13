@@ -13,7 +13,6 @@ from datetime import datetime
 
 class DashboardTemplateView(UserPassesTestMixin, ListView):
     template_name = 'core/pages/dashboard.html'
-    # queryset = Invoicing.objects.values('total_value')
     queryset = Transactions.objects.values('value', 'date')
     context_object_name = 'total'
 
