@@ -1,5 +1,5 @@
 from django.shortcuts import render # noqa
-# from django.views.generic import View
+from django.views.generic import View # noqa
 #
 #
 # class CreateAccountView(View):
