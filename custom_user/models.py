@@ -2,15 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-class Office(models.Model):
-    name = models.CharField(
-        max_length=150
-    )
-
-    def __str__(self) -> str:
-        return self.name
-
-
 class CustomUser(AbstractUser):
     username = models.CharField(
         max_length=150, unique=True
@@ -33,15 +24,12 @@ class CustomUser(AbstractUser):
     address = models.CharField(
         max_length=150
     )
-    office = models.ForeignKey(
-        Office, on_delete=models.SET_NULL,
-        null=True, blank=True
-    )
     creation_date = models.DateField(
-        auto_created=True, blank=True, null=True
+        auto_created=True,
+        blank=True, null=True
     )
     password = models.CharField(
-        "password", max_length=128
+        max_length=128
     )
 
     def __str__(self):

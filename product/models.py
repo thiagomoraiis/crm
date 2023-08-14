@@ -17,16 +17,13 @@ class Tag(models.Model):
         return self.name
 
 
-class ProductCategory(models.Model):
-    category_name = models.CharField(
-        'Product Category', max_length=50
-    )
-
-    def __str__(self):
-        return self.category_name
-
-
 class Product(models.Model):
+    CHOICES_PRODUCT_CATEGORY = (
+        ('smartphone', 'Smartphone'),
+        ('notebook', 'Notebook'),
+        ('refrigerator', 'Refrigerator'),
+        ('stove', 'Stove')
+    )
     name = models.CharField(
         'Name of Product', max_length=150
     )
@@ -39,28 +36,30 @@ class Product(models.Model):
         decimal_places=2, blank=True, default=0.00
     )
     description = models.TextField(
-        'Description of roduct'
-    )
-    stock = models.PositiveIntegerField(
-        'Product Stock'
+        'Description'
     )
     image = models.ImageField(
-        upload_to='product'
+        'Image',
+        upload_to='product/%y/%m/%d'
     )
     slug = models.SlugField(
         'Slug', editable=False,
         unique=True, blank=True
     )
-    category = models.ForeignKey(
-        ProductCategory, on_delete=models.CASCADE
+    category = models.CharField(
+        'Category', max_length=20,
+        choices=CHOICES_PRODUCT_CATEGORY,
     )
     posted_by = models.ForeignKey(
+        'Posted by',
         CustomUser, on_delete=models.CASCADE
     )
     creation_date = models.DateField(
+        'Date of Insert',
         auto_now_add=True
     )
     tags = models.ManyToManyField(
+        'Tags',
         Tag, blank=True
     )
 
@@ -82,13 +81,14 @@ class Product(models.Model):
 
         return super().save(*args, **kwargs)
 
-# class Inventory(models.Model):
-#     product = models.ForeignKey(
-#         Product, on_delete=models.CASCADE
-#     )
-#     quantity = models.PositiveIntegerField(
-#         blank=True, default=0
-#     )
-#
-#     def __str__(self) -> str:
-#         return f'{self.product.name} - {self.quantity}'
+
+class Inventory(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE
+    )
+    quantity = models.PositiveIntegerField(
+        blank=True, default=0
+    )
+
+    def __str__(self) -> str:
+        return f'{self.product.name} - {self.quantity}'
