@@ -51,7 +51,6 @@ class Product(models.Model):
         choices=CHOICES_PRODUCT_CATEGORY,
     )
     posted_by = models.ForeignKey(
-        'Posted by',
         CustomUser, on_delete=models.CASCADE
     )
     creation_date = models.DateField(
@@ -59,7 +58,6 @@ class Product(models.Model):
         auto_now_add=True
     )
     tags = models.ManyToManyField(
-        'Tags',
         Tag, blank=True
     )
 

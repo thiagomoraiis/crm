@@ -75,6 +75,7 @@ class ProductListView(UserPassesTestMixin, ListView):
     template_name = 'core/pages/list_products.html'
     context_object_name = 'products'
     queryset = Product.objects.all()
+    paginate_by = 10
 
     def test_func(self):
         return self.request.user.is_staff

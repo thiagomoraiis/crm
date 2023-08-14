@@ -1,15 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductCategory, Tag
-
-
-# @admin.register(Discounts)
-# class DiscountsAdmin(admin.ModelAdmin):
-#     list_display = ('name', 'value')
-
-
-@admin.register(ProductCategory)
-class ProductCategoryAdmin(admin.ModelAdmin):
-    list_display = ('category_name',)
+from .models import Product, Tag, Inventory
 
 
 @admin.register(Tag)
@@ -20,3 +10,8 @@ class TagAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name',)
+
+
+@admin.register(Inventory)
+class InventoryAdmin(admin.ModelAdmin):
+    list_display = ('quantity', 'product')

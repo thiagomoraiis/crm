@@ -7,8 +7,8 @@ from django.views.generic import (DeleteView, View,
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from cart.models import Cart, CartItem
-from django.core.exceptions import ValidationError
-from django.contrib import messages
+# from django.core.exceptions import ValidationError
+# from django.contrib import messages
 
 
 class ProductDetailView(View):
@@ -49,13 +49,13 @@ class ProductDetailView(View):
                 quantity=quantity
             )
 
-        if product.stock >= quantity:
-            product.stock -= quantity
-            product.save()
-        else:
-            raise ValidationError(
-                messages.error(self.request, 'Stock Insuficiente')
-            )
+        # if product.stock >= quantity:
+        #     product.stock -= quantity
+        #     product.save()
+        # else:
+        #     raise ValidationError(
+        #         messages.error(self.request, 'Stock Insuficiente')
+        #     )
 
         return render(request, 'core/pages/product.html', {'product': product})
 
@@ -64,7 +64,7 @@ class ProductCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
     template_name = 'core/pages/product_form.html'
     fields = [
         'name', 'price', 'description',
-        'stock', 'image', 'category',
+        'image', 'category',
         'tags'
     ]
     model = Product
@@ -82,8 +82,8 @@ class ProductUpdateView(UserPassesTestMixin, UpdateView):
     template_name = 'core/pages/product_form.html'
     fields = [
         'name', 'price', 'description',
-        'stock', 'image', 'category',
-        'posted_by', 'tags'
+        'image', 'category',
+        'tags'
     ]
     model = Product
     context_object_name = 'product'

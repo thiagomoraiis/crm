@@ -82,7 +82,7 @@ class CartView(View):
 
 def remove_item(request, id):
     product = get_object_or_404(CartItem, id=id)
-    product.delete
+    product.delete()
     return redirect('core:index')
 
 # class CartListView(ListView):
