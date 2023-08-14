@@ -1,3 +1,10 @@
 from django.shortcuts import render # noqa
-
-# Create your views here.
+# from django.views.generic import View
+#
+#
+# class CreateAccountView(View):
+#     def get(self, request):
+#         pass
+#
+#     def post(self, request):
+#         pass
