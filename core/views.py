@@ -82,12 +82,12 @@ class TransactionsListView(ListView):
 
 
 class InventoryCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
-    template_name = 'core/pages/product_form.html'
+    template_name = 'core/pages/inventory_form.html'
     fields = [
         'product', 'quantity'
     ]
     model = Inventory
-    success_url = reverse_lazy('core:product-list')
+    success_url = reverse_lazy('product:product-list')
 
     def form_valid(self, form):
         form.instance.posted_by = self.request.user
@@ -98,14 +98,14 @@ class InventoryCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
 
 
 class InventoryUpdateView(UserPassesTestMixin, UpdateView):
-    template_name = 'core/pages/product_form.html'
+    template_name = 'core/pages/inventory_form.html'
     fields = [
         'product', 'quantity'
     ]
     model = Product
     context_object_name = 'product'
     pk_url_kwarg = 'id'
-    success_url = reverse_lazy('core:product-list')
+    success_url = reverse_lazy('product:product-list')
 
     def test_func(self):
         return self.request.user.is_staff
@@ -113,8 +113,8 @@ class InventoryUpdateView(UserPassesTestMixin, UpdateView):
 
 class InventoryDeleteView(UserPassesTestMixin, DeleteView):
     model = Product
-    template_name = 'core/pages/product_delete.html'
-    success_url = reverse_lazy('core:product-list')
+    template_name = 'core/pages/inventory_delete.html'
+    success_url = reverse_lazy('product:product-list')
     context_object_name = 'product'
     pk_url_kwarg = 'id'
 

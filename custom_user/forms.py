@@ -8,7 +8,7 @@ class UserRegisterModelForm(forms.ModelForm):
         fields = (
             'username', 'first_name', 'last_name',
             'email', 'telephone', 'city', 'address',
-            'office', 'password'
+            'password'
         )
         widgets = {
             'username': forms.TextInput(
@@ -30,9 +30,6 @@ class UserRegisterModelForm(forms.ModelForm):
                 attrs={'class': 'form-control'}
             ),
             'address': forms.TextInput(
-                attrs={'class': 'form-control'}
-            ),
-            'office': forms.TextInput(
                 attrs={'class': 'form-control'}
             ),
             'password': forms.PasswordInput(
