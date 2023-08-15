@@ -1,0 +1,43 @@
+def post(self, request):
+    product_cart = self.get_products(request)
+    total_price_cart = product_cart.aggregate(
+        total_price_sum=Sum('total_price_item')
+    )['total_price_sum']
+
+    self.create_or_update_invoicing(request)
+    self.create_historic_item(request, product_cart)
+    product_cart.delete()
+
+    return render(
+        request, 'cart/pages/cart.html',
+        {'products': product_cart,
+            'quantity': product_cart.count(),
+            }
+    )
+
+def create_historic_item(self, request, product_cart):
+    historic, created = PurchaseHistoric.objects.get_or_create(
+        owner=self.request.user
+    )
+    for cart_item in product_cart:
+        historic_item = HistoricItem.objects.create( # noqa
+            historic=historic, product=cart_item.product_item
+        )
+
+def create_or_update_invoicing(self, request):
+    transactions = self.create_transaction()
+    invoicing = Invoicing.objects.filter().first()
+
+    if invoicing:
+        invoicing.total_value += transactions.value
+        invoicing.save()
+    else:
+        value_invoicing = transactions.value
+        invoicing = Invoicing.objects.create(total_value=value_invoicing)
+
+
+def create_transaction(self):
+    transactions = Transactions.objects.create( # noqa
+        value=total_price_cart, client=self.request.user
+    )
+    return transactions

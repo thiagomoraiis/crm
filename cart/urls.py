@@ -5,7 +5,7 @@ app_name = 'cart'
 
 urlpatterns = [
     path(
-        'cart/',
+        '',
         CartView.as_view(),
         name='cart'
     ),

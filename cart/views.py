@@ -42,7 +42,6 @@ class CartView(View):
         else:
             return render(
                 request, 'cart/pages/cart.html',
-                {'product_cart': product_cart}
             )
 
     def post(self, request):
@@ -51,17 +50,18 @@ class CartView(View):
             total_price_sum=Sum('total_price_item')
         )['total_price_sum']
 
-        transactions = Transactions.objects.create( # noqa
-            value=total_price_cart, client=self.request.user
-        )
-        invoicing = Invoicing.objects.filter().first()
-        if invoicing:
-            invoicing.total_value += transactions.value
-            invoicing.save()
-        else:
-            value_invoicing = transactions.value
-            invoicing = Invoicing.objects.create(total_value=value_invoicing)
+        self.create_or_update_invoicing(total_price_cart)
+        self.create_historic_item(product_cart)
+        product_cart.delete()
 
+        return render(
+            request, 'cart/pages/cart.html',
+            {'products': product_cart,
+             'quantity': product_cart.count()
+             }
+        )
+
+    def create_historic_item(self, product_cart):
         historic, created = PurchaseHistoric.objects.get_or_create(
             owner=self.request.user
         )
@@ -69,15 +69,23 @@ class CartView(View):
             historic_item = HistoricItem.objects.create( # noqa
                 historic=historic, product=cart_item.product_item
             )
-        product_cart.delete()
 
-        return render(
-            request, 'cart/pages/cart.html',
-            {'products': product_cart,
-             'quantity': product_cart.count(),
-             # 'total_price_cart': round(total_price_cart, 2),
-             }
+    def create_or_update_invoicing(self, total_price_cart):
+        transactions = self.create_transaction(total_price_cart)
+        invoicing = Invoicing.objects.filter().first()
+
+        if invoicing:
+            invoicing.total_value += transactions.value
+            invoicing.save()
+        else:
+            value_invoicing = transactions.value
+            invoicing = Invoicing.objects.create(total_value=value_invoicing)
+
+    def create_transaction(self, total_price_cart):
+        transactions = Transactions.objects.create( # noqa
+            value=total_price_cart, client=self.request.user
         )
+        return transactions
 
 
 def remove_item(request, id):
