@@ -1,0 +1,15 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <form action="" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

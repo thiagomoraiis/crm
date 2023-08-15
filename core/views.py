@@ -1,14 +1,16 @@
 from django.shortcuts import render, get_object_or_404 # noqa
+from django.urls import reverse_lazy
 from django.views.generic import (TemplateView, ListView)
-from django.contrib.auth.mixins import UserPassesTestMixin
-from core.models import Transactions
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from core.models import Transactions, Inventory
 from product.models import Product
 from cart.models import Cart, CartItem
-# from django.utils.decorators import method_decorator
-# from django.contrib.auth.decorators import login_required
 from django.db.models import Sum # noqa
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
+from django.views.generic import DeleteView, UpdateView, CreateView
+# from django.utils.decorators import method_decorator
+# from django.contrib.auth.decorators import login_required
 
 
 class DashboardTemplateView(UserPassesTestMixin, ListView):
@@ -71,19 +73,50 @@ class RegisterTemplateView(TemplateView):
     template_name = 'core/pages/register.html'
 
 
-class ProductListView(UserPassesTestMixin, ListView):
-    template_name = 'core/pages/list_products.html'
-    context_object_name = 'products'
-    queryset = Product.objects.all()
-    paginate_by = 10
-
-    def test_func(self):
-        return self.request.user.is_staff
-
-
 class TransactionsListView(ListView):
     template_name = 'core/pages/transactions_list.html'
     model = Transactions
     queryset = Transactions.objects.all()
     context_object_name = 'transactions'
     paginate_by = 9
+
+
+class InventoryCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
+    template_name = 'core/pages/product_form.html'
+    fields = [
+        'product', 'quantity'
+    ]
+    model = Inventory
+    success_url = reverse_lazy('core:product-list')
+
+    def form_valid(self, form):
+        form.instance.posted_by = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class InventoryUpdateView(UserPassesTestMixin, UpdateView):
+    template_name = 'core/pages/product_form.html'
+    fields = [
+        'product', 'quantity'
+    ]
+    model = Product
+    context_object_name = 'product'
+    pk_url_kwarg = 'id'
+    success_url = reverse_lazy('core:product-list')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class InventoryDeleteView(UserPassesTestMixin, DeleteView):
+    model = Product
+    template_name = 'core/pages/product_delete.html'
+    success_url = reverse_lazy('core:product-list')
+    context_object_name = 'product'
+    pk_url_kwarg = 'id'
+
+    def test_func(self):
+        return self.request.user.is_staff

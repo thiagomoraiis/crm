@@ -1,5 +1,6 @@
 from django.db import models # noqa
 from custom_user.models import CustomUser
+from product.models import Product
 
 
 class Transactions(models.Model):
@@ -29,6 +30,18 @@ class Transactions(models.Model):
 
     def __str__(self) -> str:
         return f'{self.title} - {self.value} - {self.client}'
+
+
+class Inventory(models.Model):
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE
+    )
+    quantity = models.PositiveIntegerField(
+        blank=True, default=0
+    )
+
+    def __str__(self) -> str:
+        return f'{self.product.name} - {self.quantity}'
 
 
 class Invoicing(models.Model):

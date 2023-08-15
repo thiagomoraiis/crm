@@ -1,6 +1,6 @@
 # flake8: noqa
 from django.contrib import admin
-from .models import Transactions, Invoicing
+from .models import Inventory, Transactions, Invoicing
 
 
 @admin.register(Transactions)
@@ -14,3 +14,8 @@ class TransactionsAdmin(admin.ModelAdmin):
 @admin.register(Invoicing)
 class InvoicingAdmin(admin.ModelAdmin):
     list_display = ('total_value',)
+
+
+@admin.register(Inventory)
+class InventoryAdmin(admin.ModelAdmin):
+    list_display = ('quantity', 'product')

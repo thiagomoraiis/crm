@@ -6,7 +6,7 @@
     <div class="row justify-content-start">
         <h1 class="mb-5">Products list</h1>
         <div class="col-1 mb-4">
-          <a href="{% url 'core:product-create' %}" class="btn btn-success d-block">Insert</a>
+          <a href="{% url 'product:product-create' %}" class="btn btn-success d-block">Insert</a>
         </div>
         <table class="table align-middle mb-0 bg-white">
             <thead class="bg-light">
@@ -43,8 +43,8 @@
                 </td>
                 <td>{{ i.posted_by.username }}</td>
                 <td>
-                    <a href="{% url 'core:product-update' i.slug %}" class="btn btn-primary btn-rounded btn-sm fw-bold">Edit</a>
-                    <a href="{% url 'core:product-delete' i.slug %}" class="btn btn-danger btn-rounded btn-sm fw-bold">Delete</a>
+                    <a href="{% url 'product:product-update' i.slug %}" class="btn btn-primary btn-rounded btn-sm fw-bold">Edit</a>
+                    <a href="{% url 'product:product-delete' i.slug %}" class="btn btn-danger btn-rounded btn-sm fw-bold">Delete</a>
                   </td>
               </tr>
               {% endfor %}

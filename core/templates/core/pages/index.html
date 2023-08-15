@@ -6,17 +6,9 @@
   <section>
     <div class="container py-5">
       <div class="row">
-        <header class="mb-4">
+        <header class="">
             <h3>New products</h3>
         </header>
-        <h2>Lista de Produtos</h2>
-        <ul>
-            {% for i in product %}
-                <li>{{ i.name }}</li>
-            {% empty %}
-                <li>Nenhum produto encontrado.</li>
-            {% endfor %}
-        </ul>
         {% for i in products %}
           <div class="col-md-12 col-lg-4 mb-4 mb-lg-0 mt-4">
             <div class="card">
@@ -27,13 +19,13 @@
                 class="card-img-top" alt="Laptop" />
               <div class="card-body">
                 <div class="d-flex justify-content-between">
-                  <p class="small"><a href="#!" class="text-muted text-decoration-none">{{ i.category }}</a></p>
+                  <p class="small"><a href="#!" class="text-muted text-decoration-none text-capitalize">{{ i.category }}</a></p>
                   <p class="small text-danger"><s></s></p>
                 </div>
     
                 <div class="d-flex justify-content-between mb-3">
                   <h5 class="mb-0 fw-bold">
-                    <a href="{% url 'core:product-detail' i.slug %}" class="text-muted text-decoration-none">{{ i.name }}</a>
+                    <a href="{% url 'product:product-detail' i.slug %}" class="text-muted text-decoration-none">{{ i.name }}</a>
                   </h5>
                   <h5 class="text-dark mb-0">${{ i.price }}</h5>
                 </div>
@@ -63,7 +55,7 @@
           <span class="step-links">
               {% if page_obj.has_previous %}
                   <!--<a href="?page=1">&laquo; first</a>-->
-                  <a class="text-decoration-none" style="color:#3b71ca;" href="?page={{ page_obj.previous_page_number }}"><<{{ page_obj.previous_page_number }}</a>
+                  <a class="text-decoration-none" style="color:#3b71ca;" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
               {% endif %}
       
               <!--<span class="current">
@@ -74,7 +66,7 @@
               </span>
       
               {% if page_obj.has_next %}
-                  <a class="text-decoration-none" style="color:#3b71ca;" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}>></a>
+                  <a class="text-decoration-none" style="color:#3b71ca;" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
                   <!--<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>-->
               {% endif %}
           </span>
