@@ -17,6 +17,7 @@ class CartView(View):
                 products = CartItem.objects.filter(
                     cart=cart
                 )
+                products = products.select_related('product_item', 'cart')
                 return products
 
             except ObjectDoesNotExist:

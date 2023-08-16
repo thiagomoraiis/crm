@@ -119,3 +119,8 @@ class InventoryListView(ListView):
     model = Inventory
     queryset = Inventory.objects.all()
     paginate_by = 15
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.select_related('product')
+        return qs

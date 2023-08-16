@@ -111,5 +111,10 @@ class ProductListView(UserPassesTestMixin, ListView):
     queryset = Product.objects.all()
     paginate_by = 10
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.select_related('posted_by')
+        return qs
+
     def test_func(self):
         return self.request.user.is_staff

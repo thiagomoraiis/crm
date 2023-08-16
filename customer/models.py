@@ -19,7 +19,9 @@ class HistoricItem(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE
     )
-    historic = models.ForeignKey(PurchaseHistoric, on_delete=models.CASCADE)
+    historic = models.ForeignKey(
+        PurchaseHistoric, on_delete=models.CASCADE
+    )
     date = models.DateTimeField(
         auto_now_add=True
     )
