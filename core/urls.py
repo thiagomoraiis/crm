@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import (IndexListView, DashboardTemplateView,
-                    RegisterTemplateView, TransactionsListView)
+                    TransactionsListView, InventoryCreateView,
+                    InventoryUpdateView, InventoryDeleteView,
+                    InventoryListView)
 
 
 app_name = 'core'
@@ -17,13 +19,28 @@ urlpatterns = [
         name='dashboard'
     ),
     path(
-        'register/',
-        RegisterTemplateView.as_view(),
-        name='register'
-    ),
-    path(
         'transactions/',
         TransactionsListView.as_view(),
         name='transactions'
-    )
+    ),
+    path(
+        'inventory/',
+        InventoryListView.as_view(),
+        name='inventory-list'
+    ),
+    path(
+        'inventory/create/',
+        InventoryCreateView.as_view(),
+        name='inventory-create'
+    ),
+    path(
+        'inventory/update/<int:id>/',
+        InventoryUpdateView.as_view(),
+        name='inventory-update'
+    ),
+    path(
+        'inventory/delete/<int:id>/',
+        InventoryDeleteView.as_view(),
+        name='inventory-delete'
+    ),
 ]

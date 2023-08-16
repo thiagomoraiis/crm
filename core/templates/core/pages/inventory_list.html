@@ -1,15 +1,52 @@
-{% extends 'global/base.html' %}
+{% extends 'core/pages/base.html' %}
 {% load static %}
 {% load bootstrap5 %}
 {% block content %}
 <div class="container">
     <div class="row">
-        <form action="" method="post">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-
-            <button type="submit" class="btn btn-primary">Send</button>
-        </form>
+        <h1>Products in Inventory</h1>
+        <table class="table align-middle mb-0 bg-white mt-3">
+            <thead class="bg-light">
+              <tr>
+                <th>Name</th>
+                <th>Stock</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in inventory %}
+              <tr>
+                <td>
+                    <div class="ms-3">
+                      <p class="fw-bold mb-1">{{ i.product }}</p>
+                    </div>
+                </td>
+                <td>
+                  <span class="badge badge-primary rounded-pill d-inline">{{ i.quantity }}</span>
+                </td>
+                <td>
+                    <a href="{% url 'core:inventory-update' i.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'core:inventory-delete' i.id %}" class="btn btn-danger">Delete</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <div class="pagination d-flex justify-content-end mt-4">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                {% endif %}
+        
+                <span class="current btn btn-primary mx-4">
+                    {{ page_obj.number }}
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404 # noqa
 from django.urls import reverse_lazy
-from django.views.generic import (TemplateView, ListView)
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from core.models import Transactions, Inventory
 from product.models import Product
@@ -8,7 +7,7 @@ from cart.models import Cart, CartItem
 from django.db.models import Sum # noqa
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
-from django.views.generic import DeleteView, UpdateView, CreateView
+from django.views.generic import DeleteView, UpdateView, CreateView, ListView
 # from django.utils.decorators import method_decorator
 # from django.contrib.auth.decorators import login_required
 
@@ -69,10 +68,6 @@ class IndexListView(ListView):
             return None, None
 
 
-class RegisterTemplateView(TemplateView):
-    template_name = 'core/pages/register.html'
-
-
 class TransactionsListView(ListView):
     template_name = 'core/pages/transactions_list.html'
     model = Transactions
@@ -87,11 +82,7 @@ class InventoryCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
         'product', 'quantity'
     ]
     model = Inventory
-    success_url = reverse_lazy('product:product-list')
-
-    def form_valid(self, form):
-        form.instance.posted_by = self.request.user
-        return super().form_valid(form)
+    success_url = reverse_lazy('core:inventory-list')
 
     def test_func(self):
         return self.request.user.is_superuser
@@ -102,21 +93,29 @@ class InventoryUpdateView(UserPassesTestMixin, UpdateView):
     fields = [
         'product', 'quantity'
     ]
-    model = Product
-    context_object_name = 'product'
+    model = Inventory
+    context_object_name = 'inventory'
     pk_url_kwarg = 'id'
-    success_url = reverse_lazy('product:product-list')
+    success_url = reverse_lazy('core:inventory-list')
 
     def test_func(self):
         return self.request.user.is_staff
 
 
 class InventoryDeleteView(UserPassesTestMixin, DeleteView):
-    model = Product
-    template_name = 'core/pages/inventory_delete.html'
-    success_url = reverse_lazy('product:product-list')
-    context_object_name = 'product'
+    model = Inventory
+    template_name = 'core/pages/inventory_delete_confirmation.html'
+    success_url = reverse_lazy('core:inventory-list')
+    context_object_name = 'inventory'
     pk_url_kwarg = 'id'
 
     def test_func(self):
         return self.request.user.is_staff
+
+
+class InventoryListView(ListView):
+    template_name = 'core/pages/inventory_list.html'
+    context_object_name = 'inventory'
+    model = Inventory
+    queryset = Inventory.objects.all()
+    paginate_by = 15

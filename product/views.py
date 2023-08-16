@@ -66,7 +66,7 @@ class ProductCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
         'tags'
     ]
     model = Product
-    success_url = reverse_lazy('product:product-list')
+    success_url = reverse_lazy('core:inventory-list')
 
     def form_valid(self, form):
         form.instance.posted_by = self.request.user
