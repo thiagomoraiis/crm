@@ -27,22 +27,27 @@ class HistoricItem(models.Model):
     def __str__(self) -> str:
         return self.product.name
 
-#
-# class Customer(models.Model):
-#     GENDER_CHOICES = (
-#         ('masculine', 'Masculine'),
-#         ('feminine', 'Feminine'),
-#     )
-#     first_name = models.CharField(max_length=100)
-#     last_name = models.CharField(max_length=100)
-#     email = models.EmailField()
-#     gender = models.CharField(
-#         max_length=10, choices=GENDER_CHOICES,
-#         null=True, blank=True
-#     )
-#     creation_date = models.DateField(
-#           auto_now_add=True, null=True, blank=True)
-#     telephone = models.CharField(max_length=16)
-#
-#     def __str__(self) -> str:
-#         return f'{self.first_name} {self.last_name}'
+
+class ContactCustomer(models.Model):
+    first_name = models.CharField(
+        max_length=100
+    )
+    last_name = models.CharField(
+        max_length=150
+    )
+    email = models.EmailField()
+    telephone = models.CharField(
+        max_length=20
+    )
+    city = models.CharField(
+        max_length=150
+    )
+    address = models.CharField(
+        max_length=150
+    )
+    creation_date = models.DateField(
+        auto_now_add=True
+    )
+
+    def __str__(self) -> str:
+        return self.name
