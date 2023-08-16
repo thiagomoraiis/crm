@@ -34,6 +34,14 @@ class ProductDetailView(View):
             cart_owner=self.request.user
         )
 
+        self.update_or_create_item_product(cart, product, quantity)
+
+        return render(
+            request, 'product/pages/product.html',
+            {'product': product}
+        )
+
+    def update_or_create_item_product(self, cart, product, quantity):
         item_cart = CartItem.objects.filter(
             product_item=product, cart=cart
         ).first()
@@ -48,19 +56,6 @@ class ProductDetailView(View):
                 product_item=product, cart=cart,
                 quantity=quantity
             )
-
-        # if product.stock >= quantity:
-        #     product.stock -= quantity
-        #     product.save()
-        # else:
-        #     raise ValidationError(
-        #         messages.error(self.request, 'Stock Insuficiente')
-        #     )
-
-        return render(
-            request, 'product/pages/product.html',
-            {'product': product}
-        )
 
 
 class ProductCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):

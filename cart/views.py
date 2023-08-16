@@ -3,7 +3,7 @@ from django.views.generic import View
 from cart.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
-from core.models import Invoicing, Transactions
+from core.models import Invoicing, Transactions, Inventory
 from customer.models import PurchaseHistoric, HistoricItem
 # from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.utils.decorators import method_decorator
@@ -20,6 +20,8 @@ class CartView(View):
                 products = CartItem.objects.filter(
                     cart=cart
                 )
+                # item = products.values('product_item')['product_item']
+                # item.pro
                 return products
 
             except ObjectDoesNotExist:
@@ -47,11 +49,12 @@ class CartView(View):
     def post(self, request):
         product_cart = self.get_products(request)
         total_price_cart = product_cart.aggregate(
-            total_price_sum=Sum('total_price_item')
-        )['total_price_sum']
+            total_price_sum=Sum('total_price_item'))['total_price_sum']
 
         self.create_or_update_invoicing(total_price_cart)
         self.create_historic_item(product_cart)
+        self.update_stock_view(product_cart)
+
         product_cart.delete()
 
         return render(
@@ -86,6 +89,22 @@ class CartView(View):
             value=total_price_cart, client=self.request.user
         )
         return transactions
+
+    def update_stock_view(self, product_cart):
+        # product_cart = self.get_products(request)
+        for item in product_cart:
+            item_filter = item.product_item.name
+            item_quantity = item.quantity
+
+            inventory_item = Inventory.objects.filter(
+                product__name=item_filter
+            ).first()
+
+            if inventory_item:
+                inventory_item.quantity -= item_quantity
+                inventory_item.save()
+            else:
+                raise ObjectDoesNotExist
 
 
 def remove_item(request, id):

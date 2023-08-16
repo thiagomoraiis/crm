@@ -41,3 +41,37 @@ def create_transaction(self):
         value=total_price_cart, client=self.request.user
     )
     return transactions
+
+
+# Product Refact
+
+    def post(self, request, slug):
+        product = self.get_product(request, slug)
+        quantity = int(self.request.POST.get('quantity', ''))
+        cart, created = Cart.objects.get_or_create(
+            cart_owner=self.request.user
+        )
+
+        self.update_or_create_item_product(cart, product)
+
+        return render(
+            request, 'product/pages/product.html',
+            {'product': product}
+        )
+
+    def update_or_create_item_product(self, cart, product):
+        item_cart = CartItem.objects.filter(
+            product_item=product, cart=cart
+        ).first()
+
+        if item_cart:
+            item_cart.quantity += quantity
+            item_cart.total_price_item = \
+                item_cart.quantity * item_cart.product_item.price
+            item_cart.save()
+        else:
+            item_cart = CartItem.objects.create(
+                product_item=product, cart=cart,
+                quantity=quantity
+            )
+
