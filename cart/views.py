@@ -5,9 +5,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
 from core.models import Invoicing, Transactions, Inventory
 from customer.models import PurchaseHistoric, HistoricItem
-# from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.utils.decorators import method_decorator
-# from django.contrib.auth.decorators import login_required
 
 
 class CartView(View):
@@ -20,8 +17,6 @@ class CartView(View):
                 products = CartItem.objects.filter(
                     cart=cart
                 )
-                # item = products.values('product_item')['product_item']
-                # item.pro
                 return products
 
             except ObjectDoesNotExist:
@@ -91,7 +86,6 @@ class CartView(View):
         return transactions
 
     def update_stock_view(self, product_cart):
-        # product_cart = self.get_products(request)
         for item in product_cart:
             item_filter = item.product_item.name
             item_quantity = item.quantity

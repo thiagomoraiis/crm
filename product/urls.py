@@ -20,7 +20,7 @@ urlpatterns = [
         name='product-delete'
     ),
     path(
-        'list/',
+        '',
         ProductListView.as_view(),
         name='product-list'
     ),

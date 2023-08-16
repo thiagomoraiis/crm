@@ -46,3 +46,6 @@ class Inventory(models.Model):
 
 class Invoicing(models.Model):
     total_value = models.DecimalField(max_digits=22, decimal_places=2)
+
+    def __str__(self) -> str:
+        return self.total_value
