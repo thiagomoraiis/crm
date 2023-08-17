@@ -9,3 +9,4 @@ from .security import *
 from .i18n import *
 from .assets import *
 from .debug_toolbar import *
+from .djangorestframework import *
