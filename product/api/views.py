@@ -31,8 +31,7 @@ def product_api_create(request):
 @api_view(['GET'])
 def product_api_detail(request, id):
     product = get_object_or_404(
-        Product.objects.filter(id=id),
-        id=id
+        Product.objects.filter(id=id), id=id
     )
     serializer = ProductModelSerializer(
         instance=product, many=False
