@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework import status
-from .serializers import InventoryModelSerializer
-from ..models import Inventory
+from .serializers import InventoryModelSerializer, InvoicingModelSerializer
+from ..models import Inventory, Invoicing
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
@@ -62,3 +62,12 @@ def inventory_api_delete_item(request, id=id):
     )
     inventory_item.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+def invoicing_api_list(request):
+    invoicing = Invoicing.objects.all()
+    serializer = InvoicingModelSerializer(
+        instance=invoicing, many=True
+    )
+    return Response(serializer.data)

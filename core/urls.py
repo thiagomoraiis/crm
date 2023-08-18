@@ -1,7 +1,7 @@
 from django.urls import path
 from .api.views import (inventory_api_create_item, inventory_api_delete_item,
                         inventory_api_detail_item, inventory_api_list,
-                        inventory_api_update_item)
+                        inventory_api_update_item, invoicing_api_list)
 from .views import (IndexListView, DashboardTemplateView,
                     TransactionsListView, InventoryCreateView,
                     InventoryUpdateView, InventoryDeleteView,
@@ -71,5 +71,10 @@ urlpatterns = [
         'inventory/api/v1/delete/<int:id>/',
         inventory_api_delete_item,
         name='inventory-api-delete'
+    ),
+    path(
+        'invoicing/api/v1/',
+        invoicing_api_list,
+        name='invoicing-api-list'
     )
 ]
