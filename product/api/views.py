@@ -50,17 +50,13 @@ def product_api_update(request, id):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
-    else:
-        return Response(
-            serializer.errors, status=status.HTTP_400_BAD_REQUEST
-        )
+    return Response(
+        serializer.errors, status=status.HTTP_400_BAD_REQUEST
+    )
 
 
 @api_view(['DELETE'])
 def product_api_delete(request, id):
-    product = get_object_or_404(
-        Product.objects.filter(id=id),
-        id=id
-    )
+    product = get_object_or_404(Product.objects.filter(id=id), id=id)
     product.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
