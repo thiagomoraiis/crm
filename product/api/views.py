@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from django.shortcuts import get_object_or_404
 from ..models import Product
 from .serializers import ProductModelSerializer
-from rest_framework import status # noqa
+from rest_framework import status
 
 
 @api_view(['GET'])
@@ -14,17 +14,6 @@ def product_api_list(request):
         instance=products, many=True,
         context={'request': request},
     )
-    return Response(serializer.data)
-
-
-@api_view(['POST'])
-def product_api_create(request):
-    serializer = ProductModelSerializer(
-        data=request.data, context={'request': request}
-    )
-
-    serializer.is_valid(raise_exception=True)
-    serializer.save()
     return Response(serializer.data)
 
 
@@ -39,6 +28,17 @@ def product_api_detail(request, id):
     return Response(
         serializer.data
     )
+
+
+@api_view(['POST'])
+def product_api_create(request):
+    serializer = ProductModelSerializer(
+        data=request.data, context={'request': request}
+    )
+
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data)
 
 
 @api_view(['PUT'])
