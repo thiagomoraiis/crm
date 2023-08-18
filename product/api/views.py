@@ -25,9 +25,7 @@ def product_api_detail(request, id):
     serializer = ProductModelSerializer(
         instance=product, many=False
     )
-    return Response(
-        serializer.data
-    )
+    return Response(serializer.data)
 
 
 @api_view(['POST'])
@@ -65,6 +63,4 @@ def product_api_delete(request, id):
         id=id
     )
     product.delete()
-    return Response(
-        status=status.HTTP_204_NO_CONTENT,
-    )
+    return Response(status=status.HTTP_204_NO_CONTENT)
