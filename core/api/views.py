@@ -11,7 +11,7 @@ def inventory_api_list(request):
     inventory = Inventory.objects.all().\
         select_related('product')
     serializer = InventoryModelSerializer(
-        intance=inventory, many=True,
+        instance=inventory, many=True,
         context={'request': request}
     )
     return Response(serializer.data)
@@ -33,8 +33,8 @@ def inventory_api_create_item(request):
     serializer = InventoryModelSerializer(
         data=request.data, context={'request': request}
     )
-    serializer.is_valid()
-    serializer.save(raise_exception=True)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
     return Response(serializer.data)
 
 

@@ -6,7 +6,7 @@ class InventoryModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inventory
         fields = [
-            'product', 'quantity'
+            'id', 'product', 'quantity'
         ]
 
 
@@ -14,5 +14,5 @@ class InvoicingModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invoicing
         fields = [
-            'total_value'
+            'id', 'total_value'
         ]
