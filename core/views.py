@@ -8,8 +8,6 @@ from django.db.models import Sum # noqa
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
 from django.views.generic import DeleteView, UpdateView, CreateView, ListView
-# from django.utils.decorators import method_decorator
-# from django.contrib.auth.decorators import login_required
 
 
 class DashboardTemplateView(UserPassesTestMixin, ListView):
@@ -22,9 +20,10 @@ class DashboardTemplateView(UserPassesTestMixin, ListView):
         current_month = datetime.today().month
         qs.values('value', 'date').filter(date__month=current_month)
 
-        qs = round(qs.values('value').aggregate(
-            sum_value=Sum('value')
-        )['sum_value'], 2)
+        if qs:
+            qs = round(qs.values('value').aggregate(
+                sum_value=Sum('value')
+            )['sum_value'], 2)
 
         return qs
 

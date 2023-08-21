@@ -11,7 +11,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'corsheaders',
 
-    'custom_user',
+    # 'custom_user',
     'core',
     'customer',
     'cart',

@@ -7,8 +7,6 @@ from django.views.generic import (DeleteView, View,
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from cart.models import Cart, CartItem
-# from django.core.exceptions import ValidationError
-# from django.contrib import messages
 
 
 class ProductDetailView(View):
@@ -63,7 +61,6 @@ class ProductCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
     fields = [
         'name', 'price', 'description',
         'image', 'category',
-        'tags'
     ]
     model = Product
     success_url = reverse_lazy('core:inventory-list')
@@ -81,7 +78,6 @@ class ProductUpdateView(UserPassesTestMixin, UpdateView):
     fields = [
         'name', 'price', 'description',
         'image', 'category',
-        'tags'
     ]
     model = Product
     context_object_name = 'product'
@@ -90,7 +86,7 @@ class ProductUpdateView(UserPassesTestMixin, UpdateView):
     success_url = reverse_lazy('product:product-list')
 
     def test_func(self):
-        return self.request.user.is_staff
+        return self.request.user.is_superuser
 
 
 class ProductDeleteView(UserPassesTestMixin, DeleteView):
@@ -102,7 +98,7 @@ class ProductDeleteView(UserPassesTestMixin, DeleteView):
     slug_url_kwarg = 'slug'
 
     def test_func(self):
-        return self.request.user.is_staff
+        return self.request.user.is_superuser
 
 
 class ProductListView(UserPassesTestMixin, ListView):
@@ -117,4 +113,4 @@ class ProductListView(UserPassesTestMixin, ListView):
         return qs
 
     def test_func(self):
-        return self.request.user.is_staff
+        return self.request.user.is_superuser

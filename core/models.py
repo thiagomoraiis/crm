@@ -1,6 +1,18 @@
 from django.db import models # noqa
-from custom_user.models import CustomUser
+from django.contrib.auth.models import User
 from product.models import Product
+
+
+class Company(models.Model):
+    owner = models.OneToOneField(
+        User, on_delete=models.SET_NULL,
+        null=True, blank=False
+    )
+    name = models.CharField(max_length=150)
+    email = models.EmailField()
+
+    def __str__(self) -> str:
+        return f'{self.name} - {self.owner.username}'
 
 
 class Transactions(models.Model):
@@ -24,7 +36,7 @@ class Transactions(models.Model):
         max_digits=8, decimal_places=2
     )
     client = models.ForeignKey(
-        CustomUser, on_delete=models.SET_NULL,
+        User, on_delete=models.SET_NULL,
         null=True, blank=True
     )
 

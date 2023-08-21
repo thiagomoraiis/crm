@@ -34,3 +34,8 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    def save(self, *args, **kwargs):
+        if self.password:
+            self.password = self.set_password(self.password)
+        return super().save(*args, **kwargs)

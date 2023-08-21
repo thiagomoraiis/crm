@@ -18,4 +18,4 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'custom_user.CustomUser'
+# AUTH_USER_MODEL = 'custom_user.CustomUser'

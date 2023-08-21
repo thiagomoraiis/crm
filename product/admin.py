@@ -1,10 +1,5 @@
 from django.contrib import admin
-from .models import Product, Tag
-
-
-@admin.register(Tag)
-class TagAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+from .models import Product
 
 
 @admin.register(Product)

@@ -1,11 +1,11 @@
 from django.db import models # noqa
-from custom_user.models import CustomUser
+from django.contrib.auth.models import User
 from product.models import Product
 
 
 class PurchaseHistoric(models.Model):
     owner = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE
+        User, on_delete=models.CASCADE
     )
     product_list = models.ManyToManyField(
         Product, through='HistoricItem'

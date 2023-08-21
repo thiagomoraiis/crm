@@ -1,14 +1,13 @@
 from django import forms
-from .models import CustomUser
+from django.contrib.auth.models import User
 
 
 class UserRegisterModelForm(forms.ModelForm):
     class Meta:
-        model = CustomUser
+        model = User
         fields = (
             'username', 'first_name', 'last_name',
-            'email', 'telephone', 'city', 'address',
-            'password'
+            'email', 'password'
         )
         widgets = {
             'username': forms.TextInput(
@@ -21,15 +20,6 @@ class UserRegisterModelForm(forms.ModelForm):
                 attrs={'class': 'form-control'}
             ),
             'email': forms.EmailInput(
-                attrs={'class': 'form-control'}
-            ),
-            'telephone': forms.TextInput(
-                attrs={'class': 'form-control'}
-            ),
-            'city': forms.TextInput(
-                attrs={'class': 'form-control'}
-            ),
-            'address': forms.TextInput(
                 attrs={'class': 'form-control'}
             ),
             'password': forms.PasswordInput(

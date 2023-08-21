@@ -1,11 +1,11 @@
 from django.db import models
-from custom_user.models import CustomUser
+from django.contrib.auth.models import User
 from product.models import Product
 
 
 class Cart(models.Model):
     cart_owner = models.OneToOneField(
-        CustomUser,
+        User,
         on_delete=models.CASCADE
     )
     cart_product = models.ManyToManyField(

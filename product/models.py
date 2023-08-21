@@ -1,20 +1,11 @@
 from django.db import models
-from custom_user.models import CustomUser
+from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-from decimal import Decimal
+# from decimal import Decimal
 from uuid import uuid1
 
 
 DISCOUNT_PERCENTAGE = 10
-
-
-class Tag(models.Model):
-    name = models.CharField(
-        max_length=50
-    )
-
-    def __str__(self) -> str:
-        return self.name
 
 
 class Product(models.Model):
@@ -30,10 +21,6 @@ class Product(models.Model):
     price = models.DecimalField(
         'Price', max_digits=7,
         decimal_places=2
-    )
-    discount_price = models.DecimalField(
-        'Discount Price', max_digits=7,
-        decimal_places=2, blank=True, default=0.00
     )
     description = models.TextField(
         'Description'
@@ -51,15 +38,16 @@ class Product(models.Model):
         choices=CHOICES_PRODUCT_CATEGORY,
     )
     posted_by = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE
+        User, on_delete=models.CASCADE
     )
     creation_date = models.DateField(
         'Date of Insert',
         auto_now_add=True
     )
-    tags = models.ManyToManyField(
-        Tag, blank=True
-    )
+    # discount_price = models.DecimalField(
+    #     'Discount Price', max_digits=7,
+    #     decimal_places=2, blank=True, default=0.00
+    # )
 
     def __str__(self) -> str:
         return self.name
@@ -69,12 +57,12 @@ class Product(models.Model):
             unique_uuid = uuid1()
             self.slug = f'{slugify(self.name)}-{unique_uuid}'
 
-        if not self.discount_price:
-            discount_price = self.discount_price
-            discount_price = (Decimal(str(
-                round(DISCOUNT_PERCENTAGE / 100, 2)
-            ))) * self.price
-            self.discount_price = discount_price
-            print(self.discount_price)
+        # if not self.discount_price:
+        #     discount_price = self.discount_price
+        #     discount_price = (Decimal(str(
+        #         round(DISCOUNT_PERCENTAGE / 100, 2)
+        #     ))) * self.price
+        #     self.discount_price = discount_price
+        #     print(self.discount_price)
 
         return super().save(*args, **kwargs)
