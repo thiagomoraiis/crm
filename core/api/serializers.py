@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
-class InventoryModelSerializer(serializers.ModelSerializer):
+class InventorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Inventory
         fields = [
@@ -20,7 +20,7 @@ class InventoryModelSerializer(serializers.ModelSerializer):
         ]
 
 
-class InvoicingModelSerializer(serializers.ModelSerializer):
+class InvoicingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invoicing
         fields = [

@@ -1,7 +1,7 @@
 from django.urls import path
-from .api.views import (inventory_api_create_item, inventory_api_delete_item,
-                        inventory_api_detail_item, inventory_api_list,
-                        inventory_api_update_item, invoicing_api_list)
+from .api.views import (InventoryListAPIView, InventoryRetrieveAPIView,
+                        InventoryCreateAPIView, InventoryUpdateAPIView,
+                        InventoryDestroyAPIView, InvoicingListAPIView)
 from .views import (IndexListView, DashboardTemplateView,
                     TransactionsListView, InventoryCreateView,
                     InventoryUpdateView, InventoryDeleteView,
@@ -49,32 +49,32 @@ urlpatterns = [
     # api
     path(
         'inventory/api/v1/',
-        inventory_api_list,
+        InventoryListAPIView.as_view(),
         name='inventory-api-list'
     ),
     path(
         'inventory/api/v1/create/',
-        inventory_api_create_item,
+        InventoryCreateAPIView.as_view(),
         name='inventory-api-create'
     ),
     path(
         'inventory/api/v1/detail/<int:id>/',
-        inventory_api_detail_item,
+        InventoryRetrieveAPIView.as_view(),
         name='inventory-api-detail'
     ),
     path(
         'inventory/api/v1/update/<int:id>/',
-        inventory_api_update_item,
+        InventoryUpdateAPIView.as_view(),
         name='inventory-api-update',
     ),
     path(
         'inventory/api/v1/delete/<int:id>/',
-        inventory_api_delete_item,
+        InventoryDestroyAPIView.as_view(),
         name='inventory-api-delete'
     ),
     path(
         'invoicing/api/v1/',
-        invoicing_api_list,
+        InvoicingListAPIView.as_view(),
         name='invoicing-api-list'
     )
 ]
