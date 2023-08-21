@@ -1,7 +1,8 @@
 from django.urls import path # noqa
-from .api.views import (product_api_list, product_api_detail,
-                        product_api_create, product_api_delete,
-                        product_api_update)
+# from .api.views import (product_api_list, product_api_detail,
+#                         product_api_create, product_api_delete,
+#                         product_api_update, ProductModelViewSet)
+from .api.views import ProductModelViewSet
 from .views import (ProductCreateView, ProductDetailView, ProductUpdateView,
                     ProductListView, ProductDeleteView)
 
@@ -32,29 +33,32 @@ urlpatterns = [
         ProductDetailView.as_view(),
         name='product-detail',
     ),
+
+    # api
+
     path(
         'api/v1/',
-        product_api_list,
+        ProductModelViewSet.as_view({'get': 'list'}),
         name='product-api-list'
     ),
     path(
         'api/v1/detail/<int:id>/',
-        product_api_detail,
+        ProductModelViewSet.as_view({'get': 'retrieve'}),
         name='product-api-detail',
     ),
     path(
         'api/v1/create/',
-        product_api_create,
+        ProductModelViewSet.as_view({'post': 'create'}),
         name='product-api-create',
     ),
     path(
         'api/v1/update/<int:id>/',
-        product_api_update,
+        ProductModelViewSet.as_view({'put': 'update'}),
         name='product-api-update',
     ),
     path(
         'api/v1/delete/<int:id>/',
-        product_api_delete,
+        ProductModelViewSet.as_view({'delete': 'destroy'}),
         name='product-api-delete'
     )
 ]
