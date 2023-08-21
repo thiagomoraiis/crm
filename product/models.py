@@ -1,11 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-# from decimal import Decimal
 from uuid import uuid1
-
-
-DISCOUNT_PERCENTAGE = 10
 
 
 class Product(models.Model):
@@ -41,13 +37,8 @@ class Product(models.Model):
         User, on_delete=models.CASCADE
     )
     creation_date = models.DateField(
-        'Date of Insert',
-        auto_now_add=True
+        'Date of Insert', auto_now_add=True
     )
-    # discount_price = models.DecimalField(
-    #     'Discount Price', max_digits=7,
-    #     decimal_places=2, blank=True, default=0.00
-    # )
 
     def __str__(self) -> str:
         return self.name
@@ -56,13 +47,5 @@ class Product(models.Model):
         if not self.slug:
             unique_uuid = uuid1()
             self.slug = f'{slugify(self.name)}-{unique_uuid}'
-
-        # if not self.discount_price:
-        #     discount_price = self.discount_price
-        #     discount_price = (Decimal(str(
-        #         round(DISCOUNT_PERCENTAGE / 100, 2)
-        #     ))) * self.price
-        #     self.discount_price = discount_price
-        #     print(self.discount_price)
 
         return super().save(*args, **kwargs)
