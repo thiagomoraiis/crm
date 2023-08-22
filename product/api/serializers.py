@@ -9,5 +9,4 @@ class ProductSerializer(serializers.ModelSerializer):
             'id', 'name', 'slug', 'price',
             'description', 'category',
             'creation_date', 'posted_by',
-            # 'tags', 'discount_price'
         )
