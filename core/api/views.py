@@ -32,15 +32,18 @@ class RegisterAccountAPIView(APIView):
 
     def post(self, request):
         serializer = UserSerializer(data=self.request.data)
-        username = self.request.data.get('username')
-        password = self.request.data.get('password')
-        user = User.objects.filter(username=username).first()
-        if not user:
-            serializer.is_valid(raise_exception=True)
+        serializer.is_valid(raise_exception=True)
+
+        username = serializer.validated_data.get('username')
+        password = serializer.validated_data.get('password')
+
+        user_exists = User.objects.filter(username=username).exists()
+        if not user_exists:
             serializer.save(password=make_password(password))
             return Response(
                 serializer.data, status=status.HTTP_201_CREATED
             )
+
         return Response(
             {'message': 'a user with that name already exists'},
             status=status.HTTP_400_BAD_REQUEST
