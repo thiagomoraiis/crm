@@ -10,6 +10,10 @@ from .serializers import (InventorySerializer, InvoicingSerializer,
                           UserSerializer)
 
 
+class InventoryListAPIView():
+    pass
+
+
 class InventoryModelViewSet(ModelViewSet):
     serializer_class = InventorySerializer
     queryset = Inventory.objects.all()
