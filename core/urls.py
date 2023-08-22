@@ -1,9 +1,19 @@
 from django.urls import path
-from .api.views import InvoicingListAPIView, InventoryModelViewSet
-from .views import (IndexListView, DashboardTemplateView,
-                    TransactionsListView, InventoryCreateView,
-                    InventoryUpdateView, InventoryDeleteView,
-                    InventoryListView)
+from .api.views import (
+    InvoicingListAPIView,
+    InventoryModelViewSet,
+    RegisterAccountAPIView
+)
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+from .views import (
+    IndexListView, DashboardTemplateView,
+    TransactionsListView, InventoryCreateView,
+    InventoryUpdateView, InventoryDeleteView,
+    InventoryListView
+)
 
 
 app_name = 'core'
@@ -76,5 +86,20 @@ urlpatterns = [
         'invoicing/api/v1/',
         InvoicingListAPIView.as_view(),
         name='invoicing-api-list'
-    )
+    ),
+
+    # Login
+
+    path(
+        'user/api/register/',
+        RegisterAccountAPIView.as_view(),
+    ),
+    path(
+        'user/api/login/token/',
+        TokenObtainPairView.as_view()
+    ),
+    path(
+        'user/api/login/token/refresh/',
+        TokenRefreshView.as_view()
+    ),
 ]
