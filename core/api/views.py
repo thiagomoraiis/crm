@@ -1,17 +1,25 @@
 from rest_framework.response import Response
 from rest_framework import status
-from ..models import Inventory, Invoicing
+from ..models import Inventory, Billing
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import make_password
-from .serializers import (InventorySerializer, InvoicingSerializer,
+from .permissions import IsOwner
+from .serializers import (InventorySerializer, BillingSerializer,
                           UserSerializer)
 
 
-class InventoryListAPIView():
-    pass
+# class InventoryListAPIView(ListAPIView):
+#     queryset = Inventory.objects.all()
+
+# class InventoryListAPIView(APIView):
+#     permission_classes = [IsAuthenticated, IsOwner]
+#
+#     def get(self, request):
+#         pass
 
 
 class InventoryModelViewSet(ModelViewSet):
@@ -26,9 +34,10 @@ class InventoryModelViewSet(ModelViewSet):
         return qs
 
 
-class InvoicingListAPIView(ListAPIView):
-    serializer_class = InvoicingSerializer
-    queryset = Invoicing.objects.all()
+class BillingListAPIView(ListAPIView):
+    serializer_class = BillingSerializer
+    queryset = Billing.objects.all()
+    permission_classes = [IsAuthenticated, IsOwner]
 
 
 class RegisterAccountAPIView(APIView):

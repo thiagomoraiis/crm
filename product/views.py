@@ -63,7 +63,7 @@ class ProductCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
         'image', 'category',
     ]
     model = Product
-    success_url = reverse_lazy('core:inventory-list')
+    success_url = reverse_lazy('product:product-list')
 
     def form_valid(self, form):
         form.instance.posted_by = self.request.user
@@ -105,7 +105,7 @@ class ProductListView(UserPassesTestMixin, ListView):
     template_name = 'product/pages/list_products.html'
     context_object_name = 'products'
     queryset = Product.objects.all()
-    paginate_by = 10
+    paginate_by = 12
 
     def get_queryset(self):
         qs = super().get_queryset()

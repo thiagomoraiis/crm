@@ -34,9 +34,8 @@ class DashboardTemplateView(UserPassesTestMixin, ListView):
 class IndexListView(ListView):
     template_name = 'core/pages/index.html'
     context_object_name = 'products'
-    model = Product
     queryset = Product.objects.all()
-    paginate_by = 15
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

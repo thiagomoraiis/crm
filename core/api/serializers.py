@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import Inventory, Invoicing
+from ..models import Inventory, Billing
 from django.contrib.auth.models import User
 
 
@@ -20,9 +20,9 @@ class InventorySerializer(serializers.ModelSerializer):
         ]
 
 
-class InvoicingSerializer(serializers.ModelSerializer):
+class BillingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Invoicing
+        model = Billing
         fields = [
             'id', 'total_value'
         ]

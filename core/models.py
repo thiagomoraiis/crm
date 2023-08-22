@@ -56,8 +56,13 @@ class Inventory(models.Model):
         return f'{self.product.name} - {self.quantity}'
 
 
-class Invoicing(models.Model):
-    total_value = models.DecimalField(max_digits=22, decimal_places=2)
+class Billing(models.Model):
+    company = models.ForeignKey(
+        Company, on_delete=models.SET_NULL, null=True
+    )
+    total_value = models.DecimalField(
+        max_digits=22, decimal_places=2
+    )
 
     def __str__(self) -> str:
-        return self.total_value
+        return f'{self.company.name} {self.total_value}'

@@ -1,6 +1,6 @@
 from django.urls import path
 from .api.views import (
-    InvoicingListAPIView,
+    BillingListAPIView,
     InventoryModelViewSet,
     RegisterAccountAPIView
 )
@@ -83,9 +83,9 @@ urlpatterns = [
         name='inventory-api-delete'
     ),
     path(
-        'invoicing/api/v1/',
-        InvoicingListAPIView.as_view(),
-        name='invoicing-api-list'
+        'billing/api/v1/',
+        BillingListAPIView.as_view(),
+        name='billing-api-list'
     ),
 
     # Login

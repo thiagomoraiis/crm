@@ -3,7 +3,7 @@ from django.views.generic import View
 from cart.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
-from core.models import Invoicing, Transactions, Inventory
+from core.models import Billing, Transactions, Inventory
 from customer.models import PurchaseHistoric, HistoricItem
 
 
@@ -47,7 +47,7 @@ class CartView(View):
         total_price_cart = product_cart.aggregate(
             total_price_sum=Sum('total_price_item'))['total_price_sum']
 
-        self.create_or_update_invoicing(total_price_cart)
+        self.create_or_update_billing(total_price_cart)
         self.create_historic_item(product_cart)
         self.update_stock_view(product_cart)
 
@@ -69,16 +69,16 @@ class CartView(View):
                 historic=historic, product=cart_item.product_item
             )
 
-    def create_or_update_invoicing(self, total_price_cart):
+    def create_or_update_billing(self, total_price_cart):
         transactions = self.create_transaction(total_price_cart)
-        invoicing = Invoicing.objects.filter().first()
+        billing = Billing.objects.filter().first()
 
-        if invoicing:
-            invoicing.total_value += transactions.value
-            invoicing.save()
+        if billing:
+            billing.total_value += transactions.value
+            billing.save()
         else:
-            value_invoicing = transactions.value
-            invoicing = Invoicing.objects.create(total_value=value_invoicing)
+            value_billing = transactions.value
+            billing = Billing.objects.create(total_value=value_billing)
 
     def create_transaction(self, total_price_cart):
         transactions = Transactions.objects.create( # noqa
