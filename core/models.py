@@ -3,16 +3,16 @@ from django.contrib.auth.models import User
 from product.models import Product
 
 
-class Company(models.Model):
-    owner = models.OneToOneField(
-        User, on_delete=models.SET_NULL,
-        null=True, blank=False
-    )
-    name = models.CharField(max_length=150)
-    email = models.EmailField()
-
-    def __str__(self) -> str:
-        return f'{self.name} - {self.owner.username}'
+# class Company(models.Model):
+#     owner = models.OneToOneField(
+#         User, on_delete=models.SET_NULL,
+#         null=True, blank=False
+#     )
+#     name = models.CharField(max_length=150)
+#     email = models.EmailField()
+#
+#     def __str__(self) -> str:
+#         return f'{self.name} - {self.owner.username}'
 
 
 class Transactions(models.Model):
@@ -56,13 +56,17 @@ class Inventory(models.Model):
         return f'{self.product.name} - {self.quantity}'
 
 
-class Billing(models.Model):
-    company = models.ForeignKey(
-        Company, on_delete=models.SET_NULL, null=True
+class Company(models.Model):
+    owner = models.OneToOneField(
+        User, on_delete=models.SET_NULL,
+        null=True, blank=False
     )
+    name = models.CharField(max_length=150)
+    email = models.EmailField()
     total_value = models.DecimalField(
-        max_digits=22, decimal_places=2
+        max_digits=22, decimal_places=2,
+        default=0.00
     )
 
     def __str__(self) -> str:
-        return f'{self.company} {self.total_value}'
+        return f'{self.name} {self.owner}'

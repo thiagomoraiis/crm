@@ -3,7 +3,7 @@ from django.views.generic import View
 from cart.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
-from core.models import Billing, Transactions, Inventory
+from core.models import Company, Transactions, Inventory
 from customer.models import PurchaseHistoric, HistoricItem
 
 
@@ -71,14 +71,14 @@ class CartView(View):
 
     def create_or_update_billing(self, total_price_cart):
         transactions = self.create_transaction(total_price_cart)
-        billing = Billing.objects.filter().first()
+        billing = Company.objects.filter().first()
 
         if billing:
             billing.total_value += transactions.value
             billing.save()
         else:
             value_billing = transactions.value
-            billing = Billing.objects.create(total_value=value_billing)
+            billing = Company.objects.create(total_value=value_billing)
 
     def create_transaction(self, total_price_cart):
         transactions = Transactions.objects.create( # noqa

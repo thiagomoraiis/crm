@@ -1,26 +1,15 @@
 from rest_framework.response import Response
 from rest_framework import status
-from ..models import Inventory, Billing
+from ..models import Inventory, Company
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import make_password
 from .permissions import IsOwner
-from .serializers import (InventorySerializer, BillingSerializer,
+from .serializers import (InventorySerializer, CompanySerializer,
                           UserSerializer)
-
-
-# class InventoryListAPIView(ListAPIView):
-#     queryset = Inventory.objects.all()
-
-# class InventoryListAPIView(APIView):
-#     permission_classes = [IsAuthenticated, IsOwner]
-#
-#     def get(self, request):
-#         pass
 
 
 class InventoryModelViewSet(ModelViewSet):
@@ -35,25 +24,21 @@ class InventoryModelViewSet(ModelViewSet):
         return qs
 
 
-class BillingListAPIView(ModelViewSet):
-    serializer_class = BillingSerializer
-    queryset = Billing.objects.all()
-    permission_classes = [IsOwner]
-    lookup_field = 'id'
-    http_method_names = ['get']
+class CompanyModelViewSet(ModelViewSet):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+    permission_classes = [IsAuthenticated, IsOwner]
 
     def get_object(self):
-        id = self.kwargs.get('id', '')
-        obj = get_object_or_404(self.get_queryset(), id=id)
-        self.check_object_permissions(self.request, obj)
-        return obj
+        pk = self.kwargs.get('pk', '')
 
-    def get_permissions(self):
-        return [IsOwner(), IsAuthenticated()]
-        # return super().get_permissions()
-    # def get_permissions(self):
-    #     return [IsAuthenticated(), IsOwner()]
-        # return super().get_permissions()
+        obj = get_object_or_404(
+            self.get_queryset(), pk=pk
+        )
+
+        self.check_object_permissions(self.request, obj)
+
+        return obj
 
 
 class RegisterAccountAPIView(APIView):
