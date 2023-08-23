@@ -65,4 +65,4 @@ class Billing(models.Model):
     )
 
     def __str__(self) -> str:
-        return f'{self.company.name} {self.total_value}'
+        return f'{self.company} {self.total_value}'

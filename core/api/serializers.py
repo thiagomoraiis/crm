@@ -24,5 +24,5 @@ class BillingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Billing
         fields = [
-            'id', 'total_value'
+            'id', 'company', 'total_value'
         ]

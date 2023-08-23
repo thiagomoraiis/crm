@@ -7,6 +7,7 @@ from .api.views import (
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
+    TokenVerifyView
 )
 from .views import (
     IndexListView, DashboardTemplateView,
@@ -84,7 +85,7 @@ urlpatterns = [
     ),
     path(
         'billing/api/v1/',
-        BillingListAPIView.as_view(),
+        BillingListAPIView.as_view({'get': 'list'}),
         name='billing-api-list'
     ),
 
@@ -102,4 +103,8 @@ urlpatterns = [
         'user/api/login/token/refresh/',
         TokenRefreshView.as_view()
     ),
+    path(
+        'user/api/login/token/verify/',
+        TokenVerifyView.as_view()
+    )
 ]

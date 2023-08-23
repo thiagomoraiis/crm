@@ -5,6 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import make_password
 from .permissions import IsOwner
@@ -34,10 +35,25 @@ class InventoryModelViewSet(ModelViewSet):
         return qs
 
 
-class BillingListAPIView(ListAPIView):
+class BillingListAPIView(ModelViewSet):
     serializer_class = BillingSerializer
     queryset = Billing.objects.all()
-    permission_classes = [IsAuthenticated, IsOwner]
+    permission_classes = [IsOwner]
+    lookup_field = 'id'
+    http_method_names = ['get']
+
+    def get_object(self):
+        id = self.kwargs.get('id', '')
+        obj = get_object_or_404(self.get_queryset(), id=id)
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+    def get_permissions(self):
+        return [IsOwner(), IsAuthenticated()]
+        # return super().get_permissions()
+    # def get_permissions(self):
+    #     return [IsAuthenticated(), IsOwner()]
+        # return super().get_permissions()
 
 
 class RegisterAccountAPIView(APIView):
