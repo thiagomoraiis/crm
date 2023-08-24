@@ -1,18 +1,6 @@
-from django.db import models # noqa
+from django.db import models
 from django.contrib.auth.models import User
 from product.models import Product
-
-
-# class Company(models.Model):
-#     owner = models.OneToOneField(
-#         User, on_delete=models.SET_NULL,
-#         null=True, blank=False
-#     )
-#     name = models.CharField(max_length=150)
-#     email = models.EmailField()
-#
-#     def __str__(self) -> str:
-#         return f'{self.name} - {self.owner.username}'
 
 
 class Transactions(models.Model):
@@ -70,3 +58,9 @@ class Company(models.Model):
 
     def __str__(self) -> str:
         return f'{self.name} {self.owner}'
+
+    def save(self, *args, **kwargs):
+        if not self.id and Company.objects.exists():
+            return
+
+        return super().save(*args, **kwargs)
