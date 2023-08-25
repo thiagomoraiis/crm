@@ -11,7 +11,7 @@ from .api.views import (
     RegisterAccountAPIView
 )
 from .views import (
-    IndexListView, DashboardTemplateView,
+    IndexListView, DashboardListView,
     TransactionsListView, InventoryCreateView,
     InventoryUpdateView, InventoryDeleteView,
     InventoryListView
@@ -33,7 +33,7 @@ urlpatterns = [
     ),
     path(
         'dashboard/',
-        DashboardTemplateView.as_view(),
+        DashboardListView.as_view(),
         name='dashboard'
     ),
     path(

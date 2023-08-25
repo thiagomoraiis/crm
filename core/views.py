@@ -10,24 +10,44 @@ from cart.models import Cart, CartItem
 from datetime import datetime
 
 
-class DashboardTemplateView(UserPassesTestMixin, ListView):
+class DashboardListView(UserPassesTestMixin, ListView):
+    """
+    A class-based view that displays a dashboard template
+        with transaction data.
+
+    This view requires the user to be a staff member to access.
+    It retrieves transaction data for the current month and
+    calculates the total sum of values.
+    """
     template_name = 'core/pages/dashboard.html'
-    queryset = Transactions.objects.values('value', 'date')
     context_object_name = 'total'
 
     def get_queryset(self):
-        qs = super().get_queryset()
+        """
+        Retrieves a queryset of transactions for the current month
+        and calculates the total value of those transactions.
+
+        Returns:
+        float: The total value of transactions for the current month,
+        rounded to two decimal places.
+            Returns 0.0 if there are no transactions for the current month.
+        """
         current_month = datetime.today().month
-        qs.values('value', 'date').filter(date__month=current_month)
+        qs = Transactions.objects.filter(date__month=current_month)
 
         if qs:
-            qs = round(qs.values('value').aggregate(
-                sum_value=Sum('value')
-            )['sum_value'], 2)
+            total_value = qs.aggregate(sum_value=Sum('value'))['sum_value']
+            total_value = round(total_value, 2)
 
-        return qs
+        return total_value
 
     def test_func(self):
+        """
+        Check if the user is a staff member.
+
+        Returns:
+            bool: True if the user is a staff member, False otherwise.
+        """
         return self.request.user.is_staff
 
 
