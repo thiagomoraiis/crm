@@ -1,7 +1,4 @@
-from django.urls import path # noqa
-# from .api.views import (product_api_list, product_api_detail,
-#                         product_api_create, product_api_delete,
-#                         product_api_update, ProductModelViewSet)
+from django.urls import path
 from .api.views import ProductModelViewSet, ProductDetailAPIView
 from .views import (ProductCreateView, ProductDetailView, ProductUpdateView,
                     ProductListView, ProductDeleteView, )
@@ -34,7 +31,7 @@ urlpatterns = [
         name='product-detail',
     ),
 
-    # api
+    # API
 
     path(
         'api/v1/',

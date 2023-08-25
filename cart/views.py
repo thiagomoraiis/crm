@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
-from cart.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
+from cart.models import Cart, CartItem
 from core.models import Company, Transactions, Inventory
 from customer.models import PurchaseHistoric, HistoricItem
 

@@ -8,7 +8,6 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('', include('core.urls')),
     path('cart/', include('cart.urls')),
-    # path('users/', include('custom_user.urls')),
     path('products/', include('product.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

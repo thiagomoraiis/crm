@@ -5,12 +5,15 @@
 {% include 'global/partials/head.html' %}
 <body>
     {% include 'global/partials/header.html' %}
+
     <main>
         {% block content %}
         {% endblock %}
     </main>
+    
     {% include 'global/partials/footer.html' %}
     {% bootstrap_javascript %}
+
     <script src="{% static 'core/js/scripts.js' %}"></script>
     <script src="{% static 'global/js/scripts.js' %}"></script>
 </body>

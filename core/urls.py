@@ -1,13 +1,14 @@
 from django.urls import path
-from .api.views import (
-    CompanyModelViewSet,
-    InventoryModelViewSet,
-    RegisterAccountAPIView
-)
+from rest_framework.routers import SimpleRouter
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
     TokenVerifyView
+)
+from .api.views import (
+    CompanyModelViewSet,
+    InventoryModelViewSet,
+    RegisterAccountAPIView
 )
 from .views import (
     IndexListView, DashboardTemplateView,
@@ -15,7 +16,6 @@ from .views import (
     InventoryUpdateView, InventoryDeleteView,
     InventoryListView
 )
-from rest_framework.routers import SimpleRouter
 
 billing_router = SimpleRouter()
 billing_router.register(
@@ -89,13 +89,8 @@ urlpatterns = [
         InventoryModelViewSet.as_view({'delete': 'destroy'}),
         name='inventory-api-delete'
     ),
-    # path(
-    #     'billing/api/v1/',
-    #     CompanyListAPIView.as_view({'get': 'list'}),
-    #     name='billing-api-list'
-    # ),
 
-    # Login
+    # Login API
 
     path(
         'user/api/register/',

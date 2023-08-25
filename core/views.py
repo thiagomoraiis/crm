@@ -1,13 +1,13 @@
 from django.shortcuts import render, get_object_or_404 # noqa
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.db.models import Sum # noqa
+from django.core.exceptions import ObjectDoesNotExist
+from django.views.generic import DeleteView, UpdateView, CreateView, ListView
 from core.models import Transactions, Inventory
 from product.models import Product
 from cart.models import Cart, CartItem
-from django.db.models import Sum # noqa
-from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
-from django.views.generic import DeleteView, UpdateView, CreateView, ListView
 
 
 class DashboardTemplateView(UserPassesTestMixin, ListView):

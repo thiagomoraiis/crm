@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Cart, CartItem
 from customer.models import HistoricItem, PurchaseHistoric
+from .models import Cart, CartItem
 
 
 class HistoricItemInline(admin.TabularInline):

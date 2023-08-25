@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from ..models import Inventory, Company
 from django.contrib.auth.models import User
+from ..models import Inventory, Company
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404
-from product.models import Product
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import (DeleteView, View,
-                                  CreateView, UpdateView, ListView)
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from cart.models import Cart, CartItem
+from product.models import Product
+from django.views.generic import (DeleteView, View,
+                                  CreateView, UpdateView, ListView)
 
 
 class ProductDetailView(View):
