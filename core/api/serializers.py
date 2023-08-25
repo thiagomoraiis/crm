@@ -16,8 +16,9 @@ class InventorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Inventory
         fields = [
-            'id', 'product', 'quantity'
+            'id', 'product', 'name', 'quantity'
         ]
+    name = serializers.StringRelatedField()
 
 
 class CompanySerializer(serializers.ModelSerializer):

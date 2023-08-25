@@ -1,5 +1,12 @@
 from rest_framework import serializers
 from ..models import Product
+from core.models import Inventory
+
+
+class InventorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Inventory
+        fields = ['quantity', ]
 
 
 class ProductSerializer(serializers.ModelSerializer):
