@@ -1,5 +1,5 @@
 from django.urls import path
-from .api.views import ProductModelViewSet, ProductDetailAPIView
+from .api.views import ProductModelViewSet
 from .views import (ProductCreateView, ProductDetailView, ProductUpdateView,
                     ProductListView, ProductDeleteView, )
 
@@ -58,9 +58,9 @@ urlpatterns = [
         ProductModelViewSet.as_view({'delete': 'destroy'}),
         name='product-api-delete'
     ),
-    path(
-        'api/v1/detail/<int:id>/',
-        ProductDetailAPIView.as_view(),
-        name='product-api-detail',
-    ),
+    # path(
+    #     'api/v1/detail/<int:id>/',
+    #     ProductDetailAPIView.as_view(),
+    #     name='product-api-detail',
+    # ),
 ]
