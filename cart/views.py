@@ -8,15 +8,25 @@ from customer.models import PurchaseHistoric, HistoricItem
 
 
 class CartView(View):
+    """
+    A class-based view handling the functionality related to
+    the user's shopping cart.
+    """
     def get_products(self, request):
+        """
+        Retrieve the products in the user's cart.
+
+        Args:
+        request (HttpRequest): The HTTP request object.
+
+        Returns:
+        QuerySet: The products in the user's cart.
+        """
         if self.request.user.is_authenticated:
             try:
                 cart = Cart.objects.filter(
-                    cart_owner=self.request.user
-                ).first()
-                products = CartItem.objects.filter(
-                    cart=cart
-                )
+                    cart_owner=self.request.user).first()
+                products = CartItem.objects.filter(cart=cart)
                 products = products.select_related('product_item', 'cart')
                 return products
 
@@ -24,16 +34,23 @@ class CartView(View):
                 return CartItem.objects.none()
 
     def get(self, request):
+        """
+        Handle the GET request to display the user's cart.
+
+        Args:
+        request (HttpRequest): The HTTP request object.
+
+        Returns:
+        HttpResponse: The rendered cart page.
+        """
         product_cart = self.get_products(request)
         if product_cart:
             total_price_cart = product_cart.aggregate(
-                total_price_sum=Sum('total_price_item')
-            )['total_price_sum']
+                total_price_sum=Sum('total_price_item'))['total_price_sum']
 
             return render(
                 request, 'cart/pages/cart.html',
-                {'products': product_cart,
-                 'quantity': product_cart.count(),
+                {'products': product_cart, 'quantity': product_cart.count(),
                  'total_price_cart': round(total_price_cart, 2),
                  }
             )
@@ -43,6 +60,16 @@ class CartView(View):
             )
 
     def post(self, request):
+        """
+        Handle the POST request to process the user's cart
+        and perform various actions.
+
+        Args:
+        request (HttpRequest): The HTTP request object.
+
+        Returns:
+        HttpResponse: The rendered cart page.
+        """
         product_cart = self.get_products(request)
         total_price_cart = product_cart.aggregate(
             total_price_sum=Sum('total_price_item'))['total_price_sum']
@@ -55,12 +82,16 @@ class CartView(View):
 
         return render(
             request, 'cart/pages/cart.html',
-            {'products': product_cart,
-             'quantity': product_cart.count()
-             }
+            {'products': product_cart, 'quantity': product_cart.count()}
         )
 
     def create_historic_item(self, product_cart):
+        """
+        Create historic items based on the products in the cart.
+
+        Args:
+        product_cart (QuerySet): The products in the user's cart.
+        """
         historic, created = PurchaseHistoric.objects.get_or_create(
             owner=self.request.user
         )
@@ -70,6 +101,12 @@ class CartView(View):
             )
 
     def create_or_update_billing(self, total_price_cart):
+        """
+        Create or update the billing for the user based on the transactions.
+
+        Args:
+        total_price_cart (float): The total price of the user's cart.
+        """
         transactions = self.create_transaction(total_price_cart)
         billing = Company.objects.filter().first()
 
@@ -81,19 +118,33 @@ class CartView(View):
             billing = Company.objects.create(total_value=value_billing)
 
     def create_transaction(self, total_price_cart):
-        transactions = Transactions.objects.create( # noqa
+        """
+        Create a transaction based on the total price of the cart.
+
+        Args:
+        total_price_cart (float): The total price of the user's cart.
+
+        Returns:
+        Transactions: The created transaction instance.
+        """
+        transactions = Transactions.objects.create(
             value=total_price_cart, client=self.request.user
         )
         return transactions
 
     def update_stock_view(self, product_cart):
+        """
+        Update the inventory stock based on the products in the cart.
+
+        Args:
+        product_cart (QuerySet): The products in the user's cart.
+        """
         for item in product_cart:
             item_filter = item.product_item.name
             item_quantity = item.quantity
 
             inventory_item = Inventory.objects.filter(
-                product__name=item_filter
-            ).first()
+                product__name=item_filter).first()
 
             if inventory_item:
                 inventory_item.quantity -= item_quantity

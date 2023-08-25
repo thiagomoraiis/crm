@@ -60,6 +60,28 @@ class Company(models.Model):
         return f'{self.name} {self.owner}'
 
     def save(self, *args, **kwargs):
+        """
+        Custom save method for the model.
+
+        This method is responsible for controlling the behavior of saving
+        the instance.
+        If the instance doesn't have an 'id' (i.e., it's a new instance)
+        and there's already at least one Company object,
+        the instance is not saved, effectively allowing only one Company
+        object to be created.
+
+        Args:
+        *args: Additional positional arguments that might be passed to
+        the parent's `save` method.
+        **kwargs: Additional keyword arguments that might be passed to
+        the parent's `save` method.
+
+        Returns:
+        None: If the instance is not saved due to the conditions
+        mentioned above.
+        Model: The saved instance, returned by calling the parent's
+        `save` method.
+        """
         if not self.id and Company.objects.exists():
             return
 
