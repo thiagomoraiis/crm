@@ -4,19 +4,11 @@ This is the project of a CRM (Customer Relationship Management) system developed
 
 ## System Requirements:
 
-### Django
-
 Create a CRM mechanism for any type of company, where it will be possible to register/remove/edit products, as well as define quantity in stock and whenever a sale is made, the stock and the total billing of the company must be updated.
-
-Crie um mecanismo de CRM para qualquer tipo de empresa, onde será possível cadastrar/remover/editar produtos, assim como definir quantidade em estoque e sempre que realizado uma venda o estoque e o faturamento total da empresa deve ser atualizado.
-
-### Django Rest Framework
 
 Continue the CRM project, now creating your API. Create endpoints for creating an account and logging in. Create endpoints to list/register/edit/remove products and these endpoints can only be accessed if the user is “logged in”. Create an endpoint to list product details as well as inventory. Create an endpoint to list the company's billing, it should only be accessed by the company owner.
 
-Dê continuidade ao projeto do CRM, agora criando sua API. Crie endpoints para criar conta e realizar login. Crie endpoints para listar/cadastrar/editar/remover produtos e estes endpoints só poderão ser acessados se o usuário estiver “logado”. Crie um endpoint para listar os detalhes do produto assim como seu estoque. Crie um endpoint para listar o faturamento da empresa, ele só deve ser acessado pelo dono da empresa.
-
-## Como está estruturado
+## Structuring
 
 The project contains 4 main apps: core, product, cart and customer
 
@@ -61,7 +53,13 @@ pip install -r requirements.txt
 python3 manage.py runserver
 ```
 
-#### 🎉 Documentações utilizadas: 
+#### 🎉 Documentation Used: 
 - [Django](https://docs.djangoproject.com/en/4.1/)
 - [Django REST framework](https://www.django-rest-framework.org/)
 - [Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
+
+
+#### 🎉 Templates used: 
+
+- [Home page and shopping cart](https://mdbootstrap.com/)
+- [System administration area](https://startbootstrap.com/theme/sb-admin-2)
