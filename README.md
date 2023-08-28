@@ -1,4 +1,4 @@
-# 🎮 CRM project with Django and Django Rest Framework
+# CRM project
 
 This is the project of a CRM (Customer Relationship Management) system developed with Django and Django Rest Framework
 
@@ -10,8 +10,17 @@ Continue the CRM project, now creating your API. Create endpoints for creating a
 
 ## Structuring
 
-The project contains 4 main apps: core, product, cart and customer
+The project contains 4 main apps: core, product, cart and customer. The cart app is only functional on the website. There are no endpoints for it, as the shopping cart is a site-specific feature.
 
+
+## Site
+
+To perform CRUD operations on products or inventory, authentication is required. The website itself doesn't have authentication enabled. In order to carry out these operations, please log in to the Django administrative area, and then return to the home page.
+
+## API
+
+### EndPoints
+loa
 ### App core
 
 * Criar conta: localhost:8000/user/api/register/
@@ -42,7 +51,7 @@ git clone https://github.com/thiagomoraiis/crm.git
 cd crm
 
 # Create and activate a virtual environment
-python3 -m venv venv
+python -m venv venv
 source venv/bin/activate
 or
 venv\Scripts\activate for Windows
