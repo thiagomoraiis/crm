@@ -16,7 +16,7 @@ class InventorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Inventory
         fields = [
-            'id', 'product', 'name', 'quantity'
+            'id', 'product', 'quantity'
         ]
 
 

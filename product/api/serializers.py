@@ -18,3 +18,4 @@ class ProductSerializer(serializers.ModelSerializer):
             'creation_date', 'posted_by',
             'image',
         )
+        read_only_fields = ('slug', 'posted_by')
