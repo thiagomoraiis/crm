@@ -8,41 +8,48 @@ Create a CRM mechanism for any type of company, where it will be possible to reg
 
 Continue the CRM project, now creating your API. Create endpoints for creating an account and logging in. Create endpoints to list/register/edit/remove products and these endpoints can only be accessed if the user is “logged in”. Create an endpoint to list product details as well as inventory. Create an endpoint to list the company's billing, it should only be accessed by the company owner.
 
-## Structuring
+## Project Structure
 
-The project contains 4 main apps: core, product, cart and customer. The cart app is only functional on the website. There are no endpoints for it, as the shopping cart is a site-specific feature.
+The project consists of four main apps:
 
+- `core`: Core functionalities and system authentication.
+- `product`: Manages product information and inventory.
+- `cart`: Specific to website functionality (not included in the API).
+- `customer`: Manages customer-related data.
+### Diagram
+
+![Diagrama](public/trilha-backend.drawio.png)
 
 ## Site
 
-To perform CRUD operations on products or inventory, authentication is required. The website itself doesn't have authentication enabled. In order to carry out these operations, please log in to the Django administrative area, and then return to the home page.
+To perform CRUD operations on products or inventory, authentication is required. The website itself doesn't have authentication enabled. In order to carry out these operations, please log in to the Django administrative area, and then return to the home page. Added a simple turnaround on the system's own administration pages. A user can only, for example, enter the product registration page if he is super user. If it is not, a "Forbidden" will be raised.
 
 ## API
 
 ### EndPoints
-loa
-### App core
 
-* Criar conta: localhost:8000/user/api/register/
-* Fazer login/obter o access token: localhost:8000/user/api/login/token/
-* Obter refresh token: localhost:8000/user/api/login/token/refresh/
-* Verificar de o token é valido: localhost:8000/user/api/login/token/verify/
+- #### Autentication:
+    - `Register:` localhost:8000/user/api/register/
+    - `Login:` localhost:8000/user/api/login/token/
+    - `Refresh Token:` localhost:8000/user/api/login/token/refresh/
+    - `Verify Token:` localhost:8000/user/api/login/token/verify/
 
-* Listar itens do Inventorio: localhost:8000/inventory/api/v1/
-* Inserir item do Inventorio: localhost:8000/inventory/api/v1/create/
-* Ver detalhe itens: localhost:8000/inventory/api/v1/detail/<int:id>/
-* Atualizar item localhost:8000/inventory/api/v1/update/<int:id>/
-* Deletar item localhost:8000/inventory/api/v1/delete/<int:id>/
+- #### Inventory:
+    - `List:` localhost:8000/inventory/api/v1/
+    - `Create:` localhost:8000/inventory/api/v1/create/
+    - `Detail:` localhost:8000/inventory/api/v1/detail/id
+    - `Update:` localhost:8000/inventory/api/v1/update/id
+    - `Delete:` localhost:8000/inventory/api/v1/delete/id
 
-* Endpoint para ver faturamento total da empresa (so pode ser acessado pelo dono) localhost:8000/billing/api/v1/1/
+- #### Billing:
+    - `Company Billing:` localhost:8000/billing/api/v1/1/
 
-### App product
-
-* Endpoint para listagem de produtos localhost:8000/products/api/v1/
-* Endpoint ver detalhe de um produto localhost:8000/products/api/v1/<int:id>/
-* Endpoint para inserir um produto: localhost:8000/products/api/v1/create/
-* Endpoint atualizar produto localhost:8000/products/api/v1/update/<int:id>/
-* Endpoint deletar produto localhost:8000/products/api/v1/delete/<int:id>/
+- #### Product:
+    - `List:` localhost:8000/products/api/v1/
+    - `Detail:` localhost:8000/products/api/v1/id/
+    - `Create:` localhost:8000/products/api/v1/create/
+    - `Update:` localhost:8000/products/api/v1/update/id/
+    - `Delete:` localhost:8000/products/api/v1/delete/id/
 
 ## 🥳 How to run the project: 
 ```
@@ -51,24 +58,27 @@ git clone https://github.com/thiagomoraiis/crm.git
 cd crm
 
 # Create and activate a virtual environment
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
-or
-venv\Scripts\activate for Windows
+
+or for Windows:
+
+venv\Scripts\activate
 
 # Install the dependencies
 pip install -r requirements.txt 
 
+python3 manage.py createsuperuser
+
 python3 manage.py runserver
 ```
 
-#### 🎉 Documentation Used: 
-- [Django](https://docs.djangoproject.com/en/4.1/)
-- [Django REST framework](https://www.django-rest-framework.org/)
-- [Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
+## 🎉 Documentation and Templates
 
+This project uses the following documentation and templates:
 
-#### 🎉 Templates used: 
-
-- [Home page and shopping cart](https://mdbootstrap.com/)
-- [System administration area](https://startbootstrap.com/theme/sb-admin-2)
+- [Django Documentation](https://docs.djangoproject.com/en/4.1/)
+- [Django REST Framework Documentation](https://www.django-rest-framework.org/)
+- [Simple JWT Documentation](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
+- [MDBootstrap Templates](https://mdbootstrap.com/)
+- [SB Admin 2 Template](https://startbootstrap.com/theme/sb-admin-2)
