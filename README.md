@@ -18,7 +18,7 @@ The project consists of four main apps:
 - `customer`: Manages customer-related data.
 ### Diagram
 
-![Diagrama](public/trilha-backend.drawio.png)
+![Diagrama](public/trilha-backend.drawio%20(1).png)
 
 ## Site
 
